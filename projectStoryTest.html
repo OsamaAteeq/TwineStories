@@ -220,10 +220,9 @@ ${i}`),b(i)}function $e(n,e=!1){return Ko(zo(n),An(),Pn(),e)}class Yo extends fe
 
 </style></head><body><state-css-variables><state-dark-theme-css-overrides><div id="backdrop"><page-skip><page-transition><div id="page" aria-live="polite"><header hidden></header><article></article><warning-list></warning-list><footer hidden></footer><error-handler></error-handler><page-skip-indicator></page-skip-indicator></div></page-transition></page-skip></div></state-dark-theme-css-overrides></state-css-variables><external-fonts></external-fonts><noscript>This requires JavaScript.</noscript></body><tw-storydata name="projectStoryTest" startnode="1" creator="Twine" creator-version="2.11.1" format="Chapbook" format-version="2.3.0" ifid="326C81EC-19FF-4EAD-BF7A-55700E930120" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Inauguration" tags="" position="500,100" size="100,100">$mediaKnows: false
 
-$approval: 52
+$approval: 56
 $funds: 1.4
 
-$decisivness: 0
 $adSpend: 0.2
 $publicSupport: 5
 $day: 1
@@ -245,6 +244,10 @@ $foodPrices: 35
 $refugeeRate: 6.4
 $healthcareLoad: 82
 $deathToll: 204
+
+$hardliner: 0
+$reformer: 0
+$decisivness: 0
 --
 National Standard: 
 Headline: New President Faces Unprecedented Crisis - Can Inexperienced Leadership Handle It?
@@ -1123,11 +1126,46 @@ Marcus : Well, General Viktor has heavily critisized the National Standard durin
 Message form:
 Marcus : Also we are a little short on party funds since we have spent all our funds on the campaign.
 
-[[I see|p3003]]</tw-passagedata><tw-passagedata pid="43" name="p3003" tags="" position="2275,350" size="100,100">I </tw-passagedata><tw-passagedata pid="44" name="p3002" tags="" position="2150,225" size="100,100">Message to:
+[[I see|p3003]]</tw-passagedata><tw-passagedata pid="43" name="p3003" tags="" position="2275,350" size="100,100">Message to:
+Marcus : Okay. Clearly, we are low on funds.
+Message form:
+Marcus : Yes, but nothing too unexpected. I am getting in touch with the representatives from MegaCorp and the Central Banking Authority. We will soon have enough funds.
+
+[[Why them?|p3004]]
+[[Okay|p3005]]</tw-passagedata><tw-passagedata pid="44" name="p3002" tags="" position="2150,225" size="100,100">Message to:
 Marcus : Why are we advertising till now?
 Message form:
-Marcus : Well, our victory is by a very small margin. If the opposition succeeds to convince the public of their narrative we will have to do what they say to stay in power or risk a no confidence vote.
+Marcus : Well, our victory is by a very small margin. If the opposition controls the narrative long enough, Parliament will start calling that &quot;the will of the people&quot;
 Message form:
 Marcus : So we have to advertise even though we are a little short on party funds.
 
-[[I see|p3003]]</tw-passagedata></tw-storydata></html>
+[[I see|p3003]]</tw-passagedata><tw-passagedata pid="45" name="p3004" tags="" position="2175,500" size="100,100">Message to:
+Marcus : Why are we looking towards them?
+Message form:
+Marcus : They made the biggest donations during the campaign and I expect them to continue. Ordinary people only donate during the campaigns, they have barely enough to spend on themselves as it is. 
+Message form:
+Marcus : I hate that I will have to talk to Thomas, that snarky son of a bitch. Don&#39;t get me wrong, Sato is evil but she knows how to talk to people. Atleast the business world teaches manners.
+Message form:
+Marcus : Sorry about that. To answer your question, CBA and MegaCorp is where the money is at.
+
+[[GoodLuck|p3005]]</tw-passagedata><tw-passagedata pid="46" name="p3005" tags="" position="2300,600" size="100,100">Message to:
+Marcus : Okay. Good Luck with that.
+Message from:
+Marcus : Thank you.
+
+[if $priority === &quot;unemployment&quot;]
+[[.|p3006]]
+[continue]
+[if $priority === &quot;inflation&quot;]
+[[.|p3007]]
+[continue]
+[if $priority === &quot;healthcare&quot;]
+[[.|p3008]]
+[continue]
+[if $priority === &quot;immigration&quot;]
+[[.|p3009]]
+[continue]
+</tw-passagedata><tw-passagedata pid="47" name="p3006" tags="" position="2100,800" size="100,100">Message from:
+Marcus : I also wanted to talk to you about the unemployment crisis. 
+Message from:
+Marcus : I have talked with Dr. Jun </tw-passagedata><tw-passagedata pid="48" name="p3007" tags="" position="2375,800" size="100,100">Jun</tw-passagedata><tw-passagedata pid="49" name="p3008" tags="" position="2650,800" size="100,100">Sara</tw-passagedata><tw-passagedata pid="50" name="p3009" tags="" position="2900,700" size="100,100">Viktor</tw-passagedata></tw-storydata></html>
