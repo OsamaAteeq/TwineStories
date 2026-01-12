@@ -226,6 +226,7 @@ $funds: 1.4
 $adSpend: 0.2
 $publicSupport: 5
 $day: 1
+$dayToAdvance: 2
 
 $saraLoyality: 10
 $viktorPower: 5
@@ -239,6 +240,9 @@ $nationalStandardSupport: -1
 
 $path: &quot;none&quot;
 $priority: &quot;none&quot;
+$choice: &quot;none&quot;
+$loan: &quot;none&quot;
+
 $unemployment: 23.1
 $foodPrices: 35
 $refugeeRate: 6.4
@@ -246,7 +250,7 @@ $healthcareLoad: 82
 $deathToll: 204
 
 $hardliner: 0
-$reformer: 0
+$reformer: 2
 $decisivness: 0
 --
 National Standard: 
@@ -436,7 +440,7 @@ Message form:
 Marcus : Enjoy the day and I will soon talk to you about them.
 
 [[.|Briefing]]
-</tw-passagedata><tw-passagedata pid="20" name="Briefing" tags="" position="1200,100" size="100,100">$day:$day+2
+</tw-passagedata><tw-passagedata pid="20" name="Briefing" tags="" position="1200,100" size="100,100">$day: $day+$dayToAdvance
 --
 National Standard:
 Headline: Silence from New Administration Raises Questions as Crises Deepen
@@ -550,7 +554,7 @@ I see, what is the situation with inflation?
 Message from:
 Sara : Food prices are up {$foodPrices}% year-over-year. Staples are hit hardest.
 Message from:
-Sara : Supply chains are fragile, and MegaCorp controls most distribution.
+Sara : Supply chains are fragile, and MegaCorp Coalition controls most distribution.
 Message from:
 Sara : It has turned into a real crisis, people can barely afford to live.
 
@@ -716,7 +720,7 @@ Sara : Inflation is getting out of control. I will talk with Dr. Jun and we will
 Message to:
 Sara : Healthcare sounds like the bigger problem and I would like for us to focus on it.
 Message from:
-Sara : The pandemic is testing our healthcare system. I will talk with Dr. Elena and I will let you know about our options.
+Sara : The pandemic is testing our healthcare system. I will talk with the healthcare minister Dr. Elena and I will let you know about our options.
 [continue]
 [if $priority === &quot;immigration&quot;]
 Message to:
@@ -730,10 +734,9 @@ Sara : Do you think we should announce about our priority to the media?
 [[Yes|p2013]]
 [[No|p2012]]</tw-passagedata><tw-passagedata pid="33" name="p2012" tags="" position="1275,1075" size="100,100">$mediaKnows: false
 $marcusTrust: $marcusTrust-1
-$decisivness: $decisivness - 1
+$decisivness: $decisivness - 2
 $approval: $approval-1
 $publicSupport: $publicSupport-2
-
 --
 Message to:
 Sara : No, I think the less they know, the better it is for us.
@@ -780,15 +783,13 @@ Sara : Okay, will do that.
 Message from:
 Sara : Talk to you soon.
 
-[[.|Decision1]]</tw-passagedata><tw-passagedata pid="35" name="Decision1" tags="" position="1900,100" size="100,100">$day:$day+2
+[[.|Decision1]]</tw-passagedata><tw-passagedata pid="35" name="Decision1" tags="" position="1900,100" size="100,100">$day: $day+$dayToAdvance
 $deathToll: 215
-$funds:$funds-$adSpend
 $funds:$funds-$adSpend
 _spent: $adSpend*1000000
 --
 Transactions:
 {_spent} to &quot;Public Index&quot; for Advertisments
-{_spent} to &quot;National Standard&quot; for Advertisments
 [if $mediaKnows === false]
 {embed passage: &#39;D1&#39;}
 [continue]
@@ -1129,7 +1130,7 @@ Marcus : Also we are a little short on party funds since we have spent all our f
 [[I see|p3003]]</tw-passagedata><tw-passagedata pid="43" name="p3003" tags="" position="2275,350" size="100,100">Message to:
 Marcus : Okay. Clearly, we are low on funds.
 Message form:
-Marcus : Yes, but nothing too unexpected. I am getting in touch with the representatives from MegaCorp and the Central Banking Authority. We will soon have enough funds.
+Marcus : Yes, but nothing too unexpected. I am getting in touch with the representatives from MegaCorp Coalition and the Central Banking Authority. We will soon have enough funds.
 
 [[Why them?|p3004]]
 [[Okay|p3005]]</tw-passagedata><tw-passagedata pid="44" name="p3002" tags="" position="2150,225" size="100,100">Message to:
@@ -1149,7 +1150,7 @@ Message form:
 Marcus : Sorry about that. To answer your question, CBA and MegaCorp is where the money is at.
 
 [[GoodLuck|p3005]]</tw-passagedata><tw-passagedata pid="46" name="p3005" tags="" position="2300,600" size="100,100">Message to:
-Marcus : Okay. Good Luck with that.
+Marcus : Okay. Good luck with that.
 Message from:
 Marcus : Thank you.
 
@@ -1168,4 +1169,361 @@ Marcus : Thank you.
 </tw-passagedata><tw-passagedata pid="47" name="p3006" tags="" position="2100,800" size="100,100">Message from:
 Marcus : I also wanted to talk to you about the unemployment crisis. 
 Message from:
-Marcus : I have talked with Dr. Jun </tw-passagedata><tw-passagedata pid="48" name="p3007" tags="" position="2375,800" size="100,100">Jun</tw-passagedata><tw-passagedata pid="49" name="p3008" tags="" position="2650,800" size="100,100">Sara</tw-passagedata><tw-passagedata pid="50" name="p3009" tags="" position="2900,700" size="100,100">Viktor</tw-passagedata></tw-storydata></html>
+Marcus : I had an extensive talk with Dr. Jun on the topic, and we have come to the conclusion that the situation is a little complex.
+Message from:
+Marcus : We came up with 2 options to counter the problem but ideally we would have liked to study the situation in depth.
+
+[[What Options?|p3010]]
+[[Take Time|p3011]]</tw-passagedata><tw-passagedata pid="48" name="p3007" tags="" position="2375,800" size="100,100">Message from:
+Jun : Madam President, I wanted to talk to you about the inflation crisis.
+Message from:
+Jun : I had a talk with Sara on the topic, and we realized that the situation is a little complex.
+Message from:
+Jun : We came up with 2 options to counter the problem but ideally we would have liked to study the situation in depth.
+
+[[What Options?|p3015]]
+[[Take Time|p3016]]</tw-passagedata><tw-passagedata pid="49" name="p3008" tags="" position="2650,800" size="100,100">Message from:
+Sara : Madam President, I wanted to talk to you about the healthcare issue.
+Message from:
+Sara : I had a talk with Dr.Elena on the topic, and we realized that the situation is a little complex given the economic situation.
+Message from:
+Sara : We came up with 2 options to counter the problem but ideally we would have liked to study the situation in depth.
+
+[[What Options?|p3019]]
+[[Take Time|p3020]]</tw-passagedata><tw-passagedata pid="50" name="p3009" tags="" position="3000,675" size="100,100">Message from:
+Sara : Madam President, did you recieve a message from the General Viktor?
+Message from:
+Viktor : Madam President, I wanted to talk to you about the immigration issue.
+Message from:
+Viktor : It is going out of control. I have studied the situation and I think our only option is to start mass deportations and lock our boarders. 
+
+
+[[Yes|p3026]]
+[[No|p3027]]</tw-passagedata><tw-passagedata pid="51" name="p3010" tags="" position="2000,925" size="100,100">Message to:
+Marcus : What are our options? 
+Message from:
+Marcus : Well, we could setup heavy taxes on corporations for hiring Non-Brancan residents. Brancan citizens will be cheaper for corporations even at a higher salary.
+Message from:
+Marcus : Either that or we could start public projects and give job gurantees to Brancan citizens. We would also need to invest some money but once the projects start paying back, we will become profitable.
+
+[[Tax Corporations|p3012]]
+[[Public Projects|p3013]]
+[[None|p3011]]</tw-passagedata><tw-passagedata pid="52" name="p3011" tags="" position="2100,1075" size="100,100">$choice: &quot;C&quot;
+$decisiveness: $decisiveness-3
+$dayToAdvance: 14
+$junTrust: $junTrust+2
+$marcusTrust: $marcusTrust+2
+--
+Message to:
+Marcus : I do not like the sound of this. Take your time, study the situation and come up with a detailed plan.
+Message from:
+Marcus : Ok. I will start discussing with Dr. Jun immediately. I already had a meeting with MegaCorp coming up. I will try to discuss this with them as well.
+
+[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="53" name="p3012" tags="" position="1850,1075" size="100,100">$choice: &quot;A&quot;
+$decisiveness: $decisiveness+3
+$publicSupport: $publicSupport+3
+$corpSupport: $corpSupport-5
+$viktorPower: $viktorPower-3
+$dayToAdvance: 7
+--
+Message to:
+Marcus : I think we should tax the corporations for hiring Non-Brancans.
+Message from:
+Marcus : Ok. I will start discussing this with Dr. Jun immediately. 
+
+[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="54" name="p3013" tags="" position="1975,1075" size="100,100">Message to:
+Marcus : I think we should start public projects and hire the unemployed population.
+Message from:
+Marcus : Ok. We have 2 options to finance these projects.
+
+[[What Options?|p3034]]</tw-passagedata><tw-passagedata pid="55" name="p3044" tags="" position="2575,1800" size="100,100">[if $priority === &quot;unemployment&quot;]
+Message to:
+Marcus : Good luck with this as well.
+Message from:
+Marcus : Thank you. Hope I was of some help.
+[continue]
+[if $priority === &quot;inflation&quot;]
+Message to:
+Jun : Good luck.
+Message from:
+Jun : Thank you. I hope this was the right decision.
+[continue]
+[if $priority === &quot;healthcare&quot;]
+Message to:
+Sara : You too.
+[continue]
+
+[[Next]]</tw-passagedata><tw-passagedata pid="56" name="p3015" tags="" position="2275,925" size="100,100">Message to:
+Jun : What are our options? 
+Message from:
+Jun : Well, we could setup price regulations for staple foods and start a rationing system. We intervene briefly to protect households while markets stabilize.
+Message from:
+Jun : Either that or we could start emergency food subsidies. We would need some funds for this but once inflation is under control we would elevate all subsidies.
+
+[[Regulate Prices|p3017]]
+[[Food subsidy|p3018]]
+[[None|p3016]]</tw-passagedata><tw-passagedata pid="57" name="p3016" tags="" position="2475,1075" size="100,100">$choice: &quot;C&quot;
+$decisiveness: $decisiveness-5
+$saraLoyality: $saraLoyality+1
+$junTrust: $junTrust+3
+$dayToAdvance: 21
+--
+Message to:
+Jun : I do not like the sound of this. Take your time, study the situation and come up with a detailed plan.
+Message from:
+Jun : Ok. I will start discussing with Sara immediately. I will ask Marcus to meet with CBA and let us know of their situation.
+
+[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="58" name="p3017" tags="" position="2225,1075" size="100,100">$choice: &quot;A&quot;
+$decisiveness: $decisiveness+5
+$publicSupport: $publicSupport+3
+$corpSupport: $corpSupport-6
+$foodPrices: $foodPrices - 9
+$reformer: $reformer+4
+$dayToAdvance: 7
+--
+Message to:
+Jun : I think we should setup price regulations for staple foods and start a rationing system. We can not afford to leave the market undisturbed. We need to provide relief as soon as possible.
+Message from:
+Jun : Ok. I will start discussing this with Sara immediately.
+
+[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="59" name="p3018" tags="" position="2350,1075" size="100,100">Message to:
+Jun :  I think we should start emergency food subsidies. We can not risk disturbing the markets and we need to provide relief as soon as possible.
+Message from:
+Jun : Ok. We have 2 options to finance this.
+
+[[What Options?|p3037]]</tw-passagedata><tw-passagedata pid="60" name="p3019" tags="" position="2600,925" size="100,100">Message to:
+Sara : What are our options? 
+Message from:
+Sara : Well, we could enforce the lockdown more strictly with on ground police and heavy fines for violations. Atleast until the healthcare load drops to a sustainable value. Who knows, maybe by then a vaccine might be developed.
+Message from:
+Sara : Either that, or we could start converting hotels and convention centers into emergency hospitals. We would need some funds and equipment for this.
+
+[[Strict Lockdown|p3021]]
+[[Emergency Hospitals|p3022]]
+[[None|p3020]]</tw-passagedata><tw-passagedata pid="61" name="p3020" tags="" position="2850,1075" size="100,100">$choice: &quot;C&quot;
+$decisiveness: $decisiveness-4
+$dayToAdvance: 14
+$saraLoyality: $saraLoyality+3
+--
+Message to:
+Sara : I do not like the sound of this. Take your time, study the situation and come up with a detailed plan.
+Message from:
+Sara : Ok. I will start discussing with Dr. Elena immediately. I will ask Marcus to meet with MegaCorp and let us know of their situation.
+
+[[GoodLuck|p3043]]</tw-passagedata><tw-passagedata pid="62" name="p3021" tags="" position="2600,1075" size="100,100">$choice: &quot;A&quot;
+$decisiveness: $decisiveness+4
+$publicSupport: $publicSupport-3
+$corpSupport: $corpSupport-4
+$dayToAdvance: 3
+--
+Message to:
+Sara :  I think we should enforce a stricter lockdown. We can not afford to lose more lives to the pandemic.
+Message from:
+Sara : Ok. I will start discussing this with Dr. Elena immediately.
+
+[[GoodLuck|p3043]]</tw-passagedata><tw-passagedata pid="63" name="p3022" tags="" position="2725,1075" size="100,100">Message to:
+Sara :  I think we should start making emergency hospitals. We can not afford a stricter lockdown in such economic situations.
+Message from:
+Sara : Ok. We have 2 options to fund this project.
+
+[[What Options?|p3040]]</tw-passagedata><tw-passagedata pid="64" name="p3043" tags="" position="2700,1425" size="100,100">Message to:
+Sara : Good luck Sara.
+Message from:
+Sara : Thank you Liz. I hope this works out well.
+Message from:
+Sara : Thank you Madam President*. Sorry about that.
+
+
+[[Its okay|p3024]]
+[[Call me Liz|p3025]]</tw-passagedata><tw-passagedata pid="65" name="p3024" tags="" position="2575,1600" size="100,100">$saraLoyality: $saraLoyality-1
+--
+Message to:
+Sara : It&#39;s okay.
+Message from:
+Sara : Talk to you soon. Enjoy the rest of your day.
+
+[[You too|p3044]]</tw-passagedata><tw-passagedata pid="66" name="p3025" tags="" position="2800,1600" size="100,100">$saraLoyality: $saraLoyality+3
+--
+Message to:
+Sara : You can call me Liz
+Message from:
+Sara : Thank you. Enjoy the rest of your day.
+
+[[You too|p3044]]</tw-passagedata><tw-passagedata pid="67" name="p3026" tags="" position="2925,800" size="100,100">Message to:
+Sara : Yes I did.
+Message from:
+Sara : What did he say?
+
+[[Deport|3028]]
+</tw-passagedata><tw-passagedata pid="68" name="p3027" tags="" position="3100,800" size="100,100">Message to:
+Sara : No
+Message from:
+Sara : He will probably lie to you that deporting the immigrants is the only option.
+
+[[Other option?|3029]]
+</tw-passagedata><tw-passagedata pid="69" name="3028" tags="" position="2925,925" size="100,100">Message to:
+Sara : He said that the only option is to deport the immigrants since the situation is really bad.
+Message from:
+Sara : I knew it.
+
+[[Is it not?|3029]]
+</tw-passagedata><tw-passagedata pid="70" name="3029" tags="" position="3100,925" size="100,100">Message to:
+Sara : What are you proposing?
+Message from:
+Sara : I am proposing that you remove him from this post. 8 years ago, we were all refugees. I am proposing a quicker integration program for refugees. We train them, giving jobs to them and the locals and they can start contributing to our economy.	
+
+[[Deport them|3030]]
+[[Integrate them|3031]]
+</tw-passagedata><tw-passagedata pid="71" name="3030" tags="" position="2975,1075" size="100,100">$saraLoyality: $saraLoyality-8
+$viktorPower: $viktorPower-5
+--
+Message to:
+Viktor : That is our only option. Let us do it then.
+Message from:
+Viktor : Okay. I will get the immigration department working on it.
+
+[[.|p3044]]
+[[Inform Sara|p3032]]
+
+</tw-passagedata><tw-passagedata pid="72" name="3031" tags="" position="3150,1075" size="100,100">$viktorPower: $viktorPower+7
+$saraLoyality: $saraLoyality+5
+--
+Message to:
+Sara : That is our only option. Let us do it then.
+Message from:
+Sara : Okay. I will get the immigration department working on it.
+
+[[.|p3044]]
+[[Inform Viktor|p3033]]
+
+</tw-passagedata><tw-passagedata pid="73" name="p3032" tags="" position="3000,1250" size="100,100">$saraLoyality: $saraLoyality+2
+--
+Message to:
+Sara : Sorry Sara, I can not see your plan working the way you hope it will.
+Message from:
+Sara : I can not say that I am not disappointed but I understand.
+
+[[.|p3044]]</tw-passagedata><tw-passagedata pid="74" name="p3033" tags="" position="3175,1250" size="100,100">$viktorPower: $viktorPower-1
+--
+Message to:
+Viktor : Sorry General, I can not see your plan working the way you hope it will.
+Message to:
+Viktor : I am letting Sara incharge of the department.
+Message from:
+Viktor : I can not say that I am not disappointed.
+[[.|p3044]]</tw-passagedata><tw-passagedata pid="75" name="Next" tags="" position="3300,100" size="100,100"></tw-passagedata><tw-passagedata pid="76" name="p3034" tags="" position="2000,1200" size="100,100">Message to:
+Marcus : What are our options here? 
+Message from:
+Marcus : Either we take a loan from the Central Banking Authority and we repay it once the projects become profitable
+Message from:
+Marcus : Or we could fund it through emergency corporate tax and wealth tax on high earners.
+
+[[Take Loan|p3035]]
+[[Wealth Tax|p3036]]
+[[None|p3011]]</tw-passagedata><tw-passagedata pid="77" name="p3035" tags="" position="1900,1325" size="100,100">$choice: &quot;B&quot;
+$loan: &quot;CBA&quot;
+$hardliner:$hardliner+5
+$bankSupport: $bankSupport+5
+$decisiveness: $decisiveness+3
+$publicSupport: $publicSupport+2
+$corpSupport: $corpSupport-3
+$dayToAdvance: 7
+--
+Message to:
+Marcus : Arrange a loan with the CBA.
+Message from:
+Marcus : Ok. I will start discussing this with CBA and Dr. Jun immediately.
+
+[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="78" name="p3036" tags="" position="2025,1325" size="100,100">$choice: &quot;B&quot;
+$reformer: $reformer+4
+$corpSupport: $corpSupport-8
+$bankSupport: $bankSupport-3
+$publicSupport: $publicSupport+5
+$decisiveness: $decisiveness+3
+$dayToAdvance: 7
+--
+Message to:
+Marcus : Implement the corporate and wealth taxes.
+Message from:
+Marcus : Ok. I will start discussing this with Dr. Jun immediately. 
+
+[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="79" name="p3037" tags="" position="2300,1200" size="100,100">Message to:
+Jun : What are our options here? 
+Message from:
+Jun : Either we take a loan from the Central Banking Authority and we repay it once the situation is stable.
+Message from:
+Jun : Or we could fund it through emergency wealth tax.
+
+[[Take Loan|p3038]]
+[[Wealth Tax|p3039]]
+[[None|p3016]]</tw-passagedata><tw-passagedata pid="80" name="p3038" tags="" position="2175,1325" size="100,100">$choice: &quot;B&quot;
+$loan: &quot;CBA&quot;
+$corpSupport: $corpSupport+3
+$bankSupport: $bankSupport+4
+$hardliner: $hardliner+4
+$foodPrices: $foodPrices - 12
+$decisiveness: $decisiveness+2
+$publicSupport: $publicSupport+2
+$dayToAdvance: 7
+--
+Message to:
+Jun : Ask Marcus to arrange a loan with the CBA.
+Message from:
+Jun : I will start discussing this with Sara and Marcus immediately.
+
+[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="81" name="p3039" tags="" position="2325,1325" size="100,100">$choice: &quot;B&quot;
+$reformer: $reformer+4
+$corpSupport: $corpSupport-5
+$bankSupport: $bankSupport-3
+$publicSupport: $publicSupport+5
+$decisiveness: $decisiveness+2
+$dayToAdvance: 7
+--
+Message to:
+Jun : Implement the wealth taxes.
+Message from:
+Jun : Ok. I will start discussing this with Sara immediately.
+
+[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="82" name="p3040" tags="" position="2725,1200" size="100,100"> 
+Message to:
+Sara : What are our options here? 
+Message from:
+Sara : Either we borrow money and equipment from MegaCorp’s private medical companies in exchange for long-term service contracts and regulatory stability guarantees.
+Message from:
+Sara : Or we could fund it through emergency corporate and wealth taxes and ease taxes as the situation becomes stable.
+
+[[Take Loan|p3041]]
+[[Wealth Tax|p3042]]
+[[None|p3020]]</tw-passagedata><tw-passagedata pid="83" name="p3041" tags="" position="2575,1325" size="100,100">$choice: &quot;B&quot;
+$loan: &quot;MegaCorp&quot;
+$hardliner: $hardliner+4
+$corpSupport: $corpSupport+6
+$decisiveness: $decisiveness+3
+$publicSupport: $publicSupport-2
+$healthcareLoad: $healthcareLoad-10
+$dayToAdvance: 10
+--
+Message to:
+Sara : Ask Marcus to arrange a deal with MegaCorp.
+Message from:
+Sara : I will start discussing this with Dr. Elena and Marcus immediately.
+
+[[GoodLuck|p3043]]
+
+</tw-passagedata><tw-passagedata pid="84" name="p3042" tags="" position="2850,1325" size="100,100">$choice: &quot;B&quot;
+$reformer: $reformer+4
+$corpSupport: $corpSupport-2
+$bankSupport: $bankSupport-3
+$publicSupport: $publicSupport+1
+$decisiveness: $decisiveness+3
+$healthcareLoad: $healthcareLoad-10
+$dayToAdvance: 10
+--
+Message to:
+Sara :  Implement the corporate and wealth taxes.
+Message from:
+Sara : I will start discussing this with Dr. Elena and Dr. Jun immediately.
+
+[[GoodLuck|p3043]]
+
+</tw-passagedata></tw-storydata></html>
