@@ -251,7 +251,7 @@ $deathToll: 204
 
 $hardliner: 0
 $reformer: 2
-$decisivness: 0
+$decisiveness: 0
 --
 National Standard: 
 Headline: New President Faces Unprecedented Crisis - Can Inexperienced Leadership Handle It?
@@ -734,7 +734,7 @@ Sara : Do you think we should announce about our priority to the media?
 [[Yes|p2013]]
 [[No|p2012]]</tw-passagedata><tw-passagedata pid="33" name="p2012" tags="" position="1275,1075" size="100,100">$mediaKnows: false
 $marcusTrust: $marcusTrust-1
-$decisivness: $decisivness - 2
+$decisiveness: $decisiveness - 2
 $approval: $approval-1
 $publicSupport: $publicSupport-2
 --
@@ -747,7 +747,7 @@ Sara : Okay, I will talk to you soon.
 
 [[.|Decision1]]</tw-passagedata><tw-passagedata pid="34" name="p2013" tags="" position="1600,1075" size="100,100">$mediaKnows: true
 $marcusTrust: $marcusTrust+1
-$decisivness: $decisivness + 1
+$decisiveness: $decisiveness + 1
 $approval: $approval+2
 $publicSupport: $publicSupport+1
 --
@@ -1253,7 +1253,7 @@ Message to:
 Sara : You too.
 [continue]
 
-[[Next]]</tw-passagedata><tw-passagedata pid="56" name="p3015" tags="" position="2275,925" size="100,100">Message to:
+[[Result1]]</tw-passagedata><tw-passagedata pid="56" name="p3015" tags="" position="2275,925" size="100,100">Message to:
 Jun : What are our options? 
 Message from:
 Jun : Well, we could setup price regulations for staple foods and start a rationing system. We intervene briefly to protect households while markets stabilize.
@@ -1374,7 +1374,13 @@ Sara : I am proposing that you remove him from this post. 8 years ago, we were a
 
 [[Deport them|3030]]
 [[Integrate them|3031]]
-</tw-passagedata><tw-passagedata pid="71" name="3030" tags="" position="2975,1075" size="100,100">$saraLoyality: $saraLoyality-8
+</tw-passagedata><tw-passagedata pid="71" name="3030" tags="" position="2975,1075" size="100,100">$choice: &quot;A&quot;
+$hardliner: $hardliner+6
+$corpSupport: $corpSupport-2
+$decisiveness: $decisiveness+5
+$publicSupport: $publicSupport+4
+$dayToAdvance: 7
+$saraLoyality: $saraLoyality-8
 $viktorPower: $viktorPower-5
 --
 Message to:
@@ -1385,8 +1391,13 @@ Viktor : Okay. I will get the immigration department working on it.
 [[.|p3044]]
 [[Inform Sara|p3032]]
 
-</tw-passagedata><tw-passagedata pid="72" name="3031" tags="" position="3150,1075" size="100,100">$viktorPower: $viktorPower+7
+</tw-passagedata><tw-passagedata pid="72" name="3031" tags="" position="3150,1075" size="100,100">$choice: &quot;B&quot;
+$reformer: $reformer+5
+$decisiveness: $decisiveness+5
+$publicSupport: $publicSupport-3
+$viktorPower: $viktorPower+7
 $saraLoyality: $saraLoyality+5
+$dayToAdvance: 7
 --
 Message to:
 Sara : That is our only option. Let us do it then.
@@ -1411,7 +1422,37 @@ Message to:
 Viktor : I am letting Sara incharge of the department.
 Message from:
 Viktor : I can not say that I am not disappointed.
-[[.|p3044]]</tw-passagedata><tw-passagedata pid="75" name="Next" tags="" position="3300,100" size="100,100"></tw-passagedata><tw-passagedata pid="76" name="p3034" tags="" position="2000,1200" size="100,100">Message to:
+[[.|p3044]]</tw-passagedata><tw-passagedata pid="75" name="Result1" tags="" position="3275,25" size="100,100">$day: $day+$dayToAdvance
+--
+[if ($choice === &quot;C&quot;)]
+{embed passage: &#39;R1C&#39;}
+[else]
+{embed passage: &#39;R1&#39;}
+[continue]
+#Covid49Memorial (214K posts)
+@HealthcareWorker_BNC (28.9K likes)
+&quot;We lost 8 colleagues this month. EIGHT. All healthcare workers trying to save others. The system is breaking and we&#39;re breaking with it. #Covid49Memorial&quot;
+@GrievingDaughter (22.4K likes)
+&quot;Mom died yesterday. Day {$day} of the new government. She waited for things to get better. They didn&#39;t. She&#39;s gone. I don&#39;t know what to feel anymore. #Covid49Memorial&quot;
+@CommunityStrong_BNC (19.8K likes)
+&quot;Virtual memorial service tonight at 8pm for everyone we lost to Covid-49 this month. Light a candle. Say their names. They mattered. #Covid49Memorial&quot;
+@StatisticsDaily (16.7K likes)
+&quot;Covid-49 deaths this month: 6,000+. That&#39;s more than 6,000 people with families, dreams, futures. Not just numbers. Remember them. #Covid49Memorial&quot;
+@YoungSurvivor_23 (13.9K likes)
+&quot;I survived Covid-49 but my lungs will never be the same. I was young and healthy. This virus doesn&#39;t care. Wear your masks. Please. #Covid49Memorial&quot;
+
+#BrancaRecipeSwap (189K posts)
+@BudgetCookingMom (24.6K likes)
+&quot;Since we&#39;re all broke: Rice + canned beans + whatever spices you have = filling meal for under $2. Been living on this for weeks. Add recipes below#BrancaRecipeSwap&quot;
+@MaKnowsBest_BNC (20.1K likes)
+&quot;War-era recipe from my mother: potato soup that feeds 6 for $3. We survived then, we&#39;ll survive now. Recipe thread: #BrancaRecipeSwap&quot;
+@CommunityKitchen_BNC (17.8K likes)
+&quot;Our community kitchen served 450 people yesterday. We share recipes, ingredients, hope. This is how we survive together. Join us. #BrancaRecipeSwap&quot;
+@TeenageSurvivor (14.3K likes)
+&quot;I&#39;m 16. I shouldn&#39;t have to know this many ways to make rice stretch for a week. But here we are. At least we&#39;re helping each other. #BrancaRecipeSwap&quot;
+@FormerChef_BNC (11.7K likes)
+&quot;Used to run a restaurant. Now teaching people how to make meals from scraps. Never thought I&#39;d be here but glad I can help. Full recipe list in the comments #BrancaRecipeSwap&quot;
+[[.|p4000]]</tw-passagedata><tw-passagedata pid="76" name="p3034" tags="" position="2000,1200" size="100,100">Message to:
 Marcus : What are our options here? 
 Message from:
 Marcus : Either we take a loan from the Central Banking Authority and we repay it once the projects become profitable
@@ -1526,4 +1567,138 @@ Sara : I will start discussing this with Dr. Elena and Dr. Jun immediately.
 
 [[GoodLuck|p3043]]
 
-</tw-passagedata></tw-storydata></html>
+</tw-passagedata><tw-passagedata pid="85" name="p4000" tags="" position="3500,100" size="100,100">$dayToAdvance: 2
+--
+</tw-passagedata><tw-passagedata pid="86" name="R1AUnemployment" tags="" position="3300,400" size="100,100"></tw-passagedata><tw-passagedata pid="87" name="R1AInflation" tags="" position="3300,525" size="100,100"></tw-passagedata><tw-passagedata pid="88" name="R1AHealthcare" tags="" position="3300,650" size="100,100"></tw-passagedata><tw-passagedata pid="89" name="R1AImmigration" tags="" position="3300,775" size="100,100"></tw-passagedata><tw-passagedata pid="90" name="R1C" tags="" position="3325,150" size="100,100">$publicSupport: $publicSupport-3
+--
+[if $mediaKnows]
+{embed passage: &#39;R1CKnow&#39;}
+[else]
+{embed passage: &#39;R1CDontKnow&#39;}
+[continue]
+</tw-passagedata><tw-passagedata pid="91" name="R1" tags="" position="3100,300" size="100,100">[if ($choice === &quot;A&quot;)]
+{embed passage: &#39;R1A&#39;}
+[else]
+{embed passage: &#39;R1B&#39;}
+[continue]</tw-passagedata><tw-passagedata pid="92" name="R1CKnow" tags="" position="3425,275" size="100,100">_prdays: $day-2
+--
+[if $publicIndexSupport &lt; 0]
+Public Index: 
+Headline: &quot;{$day} DAYS OF NOTHING - President Roberts Hides Behind &#39;Reports&#39; While {$priority} Crisis Deepens&quot;
+Article: It&#39;s been {$day} days since President Elizabeth Roberts took office promising change. {_prdays} days since she identified {$priority} crisis as a top priority. And what have we gotten? Committees. Studies. Reports. Meanwhile, real people suffer real consequences every single day. The President claims she&#39;s &quot;gathering comprehensive data&quot; before acting on the {$priority} crisis, but this isn&#39;t a university seminar - this is governance during crisis. People are losing jobs, losing homes, losing hope while she waits for the perfect report that will tell her what we already know: things are bad and getting worse. Adam Volkov has already released detailed policy proposals. Roberts has given us promises of future announcements about potential policies under consideration. This is exactly what we feared - inexperienced leadership paralyzed by the complexity of real problems. Every day of delay on {$priority} crisis is a choice. A choice to do nothing while Branca burns. The people who voted for change are starting to wonder if they made a terrible mistake.
+[continue]
+[if $publicIndexSupport &gt; 0 &amp;&amp; $publicIndexSupport&lt;4]
+Public Index: 
+Headline: &quot;President Roberts&#39; Slow Approach to {$priority} Crisis: Careful Planning or Dangerous Delay?&quot;
+Article: President Roberts announced {_prdays} days ago that addressing {$priority} would be a top priority for her administration. Today, we&#39;re still waiting for action. The President&#39;s office says they&#39;re commissioning comprehensive analysis before implementing policy changes on {$priority}, arguing that rushed decisions could make things worse. There&#39;s merit to that argument - hasty policy can create unintended consequences. But there&#39;s also reality: the {$priority} situation isn&#39;t frozen in time while reports are written. It&#39;s getting worse. Every day of inaction means more people affected, more damage done, more crisis to eventually address. Supporters say the President is being thoughtful and systematic. Critics, including opposition leader Adam Volkov, say she&#39;s indecisive and overwhelmed. The truth probably lies somewhere in between. But at some point, analysis has to become action. The question facing President Roberts is: when? After {$day} days, how much longer is too long? When does careful planning become dangerous paralysis? Those are questions she&#39;ll need to answer soon, because public patience isn&#39;t infinite. People voted for change. So far, they&#39;re getting studied inaction. That&#39;s not necessarily wrong, but it&#39;s also not what was promised.
+[continue]
+[if $publicIndexSupport &gt;= 4 &amp;&amp; $publicIndexSupport&lt;8]
+Public Index: 
+Headline: &quot;President Roberts Takes Measured Approach to {$priority} - Resisting Pressure for Quick Fixes&quot;
+Article: In an era of crisis after crisis, President Elizabeth Roberts is doing something unusual: taking time to think before acting. {$day} days into her presidency, she&#39;s still gathering comprehensive analysis on {$priority} rather than rushing into policy implementation. And you know what? Maybe that&#39;s okay. The opposition is attacking her for &quot;inaction&quot; and &quot;paralysis,&quot; but is it really paralysis to want actual data before making decisions that will affect millions of lives? Quick, dramatic action feels decisive, but we&#39;ve seen where that leads - to bigger problems that require even more dramatic action to fix. President Roberts inherited a {$priority} crisis that developed over years and a war. The idea that she should have solved it in {$day} days is absurd. Yes, the situation is urgent. Yes, people are suffering. Yes, something needs to be done. But &quot;something&quot; isn&#39;t always better than &quot;the right thing.&quot; If the President is using this time to develop comprehensive policy rather than political theater, that&#39;s actually leadership. The question is whether she can translate that analysis into effective action before the situation deteriorates beyond repair. We don&#39;t know yet. But we&#39;re willing to give her the chance to prove that careful planning leads to better outcomes. That&#39;s more benefit of the doubt than we&#39;ve given most leaders. She should use it wisely.
+[continue]
+[if $publicIndexSupport &gt;= 8]
+Public Index: 
+Headline: &quot;FINALLY: A President Who Won&#39;t Rush Into Disaster - Roberts&#39; Methodical {$priority} Approach Shows Real Leadership&quot;
+Article: For thirty years, post and pre war, we&#39;ve watched leaders make the same mistake over and over: rush to &quot;do something&quot; about a crisis, create bigger problems, then rush to fix those problems, creating even bigger problems. The cycle never ends. President Elizabeth Roberts is breaking that cycle. {_prdays} days ago, she identified {$priority} as a critical priority. And instead of immediately announcing some half-baked policy to generate headlines, she&#39;s doing something revolutionary: thinking it through. She&#39;s commissioned comprehensive analysis. She&#39;s consulting experts. She&#39;s considering unintended consequences. She&#39;s actually governing instead of performing. The opposition is attacking her for &quot;inaction&quot; because that&#39;s all they have. Adam Volkov has released plans that sound good but would create catastrophic secondary effects. That&#39;s not leadership - that&#39;s pandering. President Roberts is showing us what real leadership looks like: admitting you don&#39;t have all the answers, taking time to find them, and refusing to sacrifice long-term solutions for short-term political wins. Yes, the {$priority} crisis is urgent. Yes, people are suffering. But you know what makes people suffer more? Bad policy implemented quickly that makes everything worse. We&#39;ve lived through that enough times to know. The President is taking heat for being careful. Let her. History will show whether {$day} days of analysis led to better outcomes than {$day} days of rushed mistakes. We&#39;re betting it will.
+[continue]
+
+The Voice:
+#WaitingForTheReport (361K posts)
+@bnc_eliot (33.8K likes)
+“Government confirms no immediate action on {$priority}. Officials say a full report is being finalized. No release date given.”
+@marrowline (27.1K likes)
+“So the plan is to wait while things keep getting worse? Reports don’t lower prices, give jobs or save lives.”
+@K47_Nora (22.9K likes)
+“Rushed policy is how you create long-term damage. Studying {$priority} first is boring, but probably necessary.”
+@volkovwatch (19.4K likes)
+“‘We’re reviewing the data’ — {$day} days in. That’s not leadership, that’s stalling.”
+@AxiomBlue (15.8K likes)
+“This report is the first real test of this administration. Waiting can be smart. It can also be fatal.”
+
+#TooLateToWait (298K posts)
+@riversouth (31.5K likes)
+“Whatever is in that report, people are already paying the price. Waiting doesn’t stop the damage.”
+@lena_pq (24.9K likes)
+“I understand long-term planning. I also understand rent deadlines. These aren’t abstract problems.”
+@BNC_MarketBrief (21.7K likes)
+“Every week of inaction compounds pressure. Delay is not neutral; it’s a policy choice.”
+@halvorsen_t (18.6K likes)
+“Everyone wants careful governance until it affects them personally. Then it’s ‘do something now.’”
+@JonahR_77 (15.2K likes)
+“If the report avoids a catastrophic mistake, then waiting was worth it. That’s the gamble.”
+
+#AtLeastTheyreStudying (247K posts)
+@eastdock (28.6K likes)
+“I’d rather wait for a real plan on {$priority} than watch another rushed disaster unfold.”
+@micah_olson (22.3K likes)
+“People complain about delay now, but they’ll complain louder if this goes wrong.”
+@SeraM_K (19.1K likes)
+“A proper report means trade-offs are acknowledged instead of buried. That’s rare.”
+@northfieldvoice (16.4K likes)
+“I don’t love the silence, but fake confidence is worse. Waiting isn’t always weakness.”
+@graystation (13.7K likes)
+“Strange how ‘reading the data’ became controversial overnight.”</tw-passagedata><tw-passagedata pid="93" name="R1CDontKnow" tags="" position="3275,275" size="100,100">National Standard: 
+Headline: Government Declines Comment as Internal Review Continues
+Article: Senior government officials declined to provide details today regarding ongoing internal deliberations, offering only brief assurances that the administration is “taking the necessary time to assess the situation responsibly.”
+When pressed for specifics on policy direction or potential measures, an official spokesperson stated that no public comment would be made until a comprehensive internal report is finalized. The spokesperson emphasized that speculation at this stage would be “unproductive and potentially misleading.”
+No timeline for the report’s completion was provided, and officials avoided confirming whether any decisions have already been reached behind closed doors.
+
+The Voice:
+#NoPlan (312K posts)
+@FrustratedCitizen_BNC (31.2K likes) 
+&quot;It&#39;s been almost {$day} days. Not a single policy announcement. Not a single press conference. What is President Roberts actually DOING? #NoPlan&quot;
+@RobertSupporter (24.8K likes)
+&quot;Everyone demanding instant solutions to 30 years of pre and post war problems. She&#39;s been in office for less than a month. Let her work. Not everything needs to be announced immediately. #NoPlan&quot;
+@MediaWatcher_BNC (19.5K likes)
+&quot;The silence is deafening. Either they&#39;re working on something big, or they have no idea what they&#39;re doing. Place your bets. #NoPlan&quot;
+@OppositionVoice_Official (17.3K likes)
+&quot;Adam Volkov has held two virtual policy briefings, and released a comprehensive economic plan while in opposition. President Roberts has... studied while in government? #NoPlan&quot;
+@RealistView_47 (14.1K likes)
+&quot;Hot take: Maybe NOT announcing half-baked policies while you&#39;re still figuring things out is actually smart governance? Revolutionary concept, I know. #NoPlan&quot; 
+
+#StillNoWord (274K posts)
+@emma_rivers (29.1K likes)
+“It’s {$day} days in. No statement, no press briefing, no updates. Are they even working on any of the problems this country is facing or just chilling? #StillNoWord”
+@calvin_fox (23.4K likes)
+“Waiting for a sign of action is exhausting. People are struggling and the silence is deafening. #StillNoWord”
+@lila_martin (19.8K likes)
+“People claim the government is studying things carefully, but no one knows what that means in practice. #StillNoWord”
+@Theo_BNC (16.7K likes)
+“Some patience is fine, but this is ridiculous. How long can they keep everyone in the dark about what they are working on? #StillNoWord”
+@RiverLane_90 (14.2K likes)
+“Transparency isn’t just a buzzword. We need real updates, not vague reassurances. #StillNoWord”
+
+#StillWaiting (223K posts)
+@UnemployedEngineer (26.1K likes) 
+&quot;Month 7 of unemployment. Still waiting. Bills don&#39;t wait. Hunger doesn&#39;t wait. But apparently solutions do. #StillWaiting&quot;
+@SmallBusinessOwner_BNC (21.3K likes)
+&quot;Applied for emergency business relief 3 weeks ago. No response. Store closes in 2 weeks if nothing changes. 8 years building this. Gone. #StillWaiting&quot;
+@RefugeeAdvocate_BNC (18.7K likes)
+&quot;1,800 people in camps at the southern border. Families. Children. No word on processing, no policy announced. Just... silence. #StillWaiting&quot;
+@VeteranVoice_BNC (15.4K likes) 
+&quot;Served this country in the military. Now can&#39;t find work, can&#39;t afford food, can&#39;t get healthcare appointments. #StillWaiting&quot; 
+@StudentDebt_BNC (12.8K likes) 
+&quot;Loans deferred during reconstruction end next month. No announcement on extensions. No plan for those of us who still can&#39;t find jobs. Cool. #StillWaiting&quot;</tw-passagedata><tw-passagedata pid="94" name="R1A" tags="" position="3100,425" size="100,100">[if ($priority === &quot;unemployment&quot;)]
+{embed passage: &#39;R1AUnemployment&#39;}
+[continue]
+[if ($priority === &quot;healthcare&quot;)]
+{embed passage: &#39;R1AHealthcare&#39;}
+[continue]
+[if ($priority === &quot;inflation&quot;)]
+{embed passage: &#39;R1AInflation&#39;}
+[continue]
+[if ($priority === &quot;immigration&quot;)]
+{embed passage: &#39;R1AImmigration&#39;}
+[continue]</tw-passagedata><tw-passagedata pid="95" name="R1B" tags="" position="3100,550" size="100,100">[if ($priority === &quot;unemployment&quot;)]
+{embed passage: &#39;R1BUnemployment&#39;}
+[continue]
+[if ($priority === &quot;healthcare&quot;)]
+{embed passage: &#39;R1BHealthcare&#39;}
+[continue]
+[if ($priority === &quot;inflation&quot;)]
+{embed passage: &#39;R1BInflation&#39;}
+[continue]
+[if ($priority === &quot;immigration&quot;)]
+{embed passage: &#39;R1BImmigration&#39;}
+[continue]</tw-passagedata><tw-passagedata pid="96" name="R1BInflation" tags="" position="3450,525" size="100,100"></tw-passagedata><tw-passagedata pid="97" name="R1BUnemployment" tags="" position="3450,400" size="100,100"></tw-passagedata><tw-passagedata pid="98" name="R1BHealthcare" tags="" position="3450,650" size="100,100"></tw-passagedata><tw-passagedata pid="99" name="R1BImmigration" tags="" position="3450,775" size="100,100"></tw-passagedata></tw-storydata></html>
