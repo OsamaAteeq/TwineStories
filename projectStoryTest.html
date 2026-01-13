@@ -250,12 +250,12 @@ $healthcareLoad: 82
 $deathToll: 204
 
 $hardliner: 0
-$reformer: 2
+$reformer: 0
 $decisiveness: 0
 --
 National Standard: 
 Headline: New President Faces Unprecedented Crisis - Can Inexperienced Leadership Handle It?
-Article: President-elect Elizabeth Roberts takes office today amid what economists are calling the worst convergence of crises in Branca&#39;s post-war history. With unemployment at 23%, Covid-49 still claiming lives daily, and food prices up 35% year-over-year, the incoming administration inherits a nation on the brink. Critics, including opposition leader Adam Volkov, have questioned whether a leader whose rise through party ranks has been marked by controversy over favoritism is prepared for such challenges. &quot;This is not the time for on-the-job learning,&quot; Volkov stated in his concession speech. Financial analysts warn that Branca&#39;s banking sector remains fragile, with several major institutions showing signs of instability. Markets remained cautious ahead of the inauguration, with investors waiting to see concrete policy direction.
+Article: President-elect Elizabeth Roberts takes office today amid what economists are calling the worst convergence of crises in Branca&#39;s post-war history. With unemployment at {$unemployment}%, Covid-49 still claiming lives daily, and food prices up {$foodPrices}% year-over-year, the incoming administration inherits a nation on the brink. Critics, including opposition leader Adam Volkov, have questioned whether a leader whose rise through party ranks has been marked by controversy over favoritism is prepared for such challenges. &quot;This is not the time for on-the-job learning,&quot; Volkov stated in his concession speech. Financial analysts warn that Branca&#39;s banking sector remains fragile, with several major institutions showing signs of instability. Markets remained cautious ahead of the inauguration, with investors waiting to see concrete policy direction.
 
 Public Index: 
 Headline: FINALLY CHANGE IS HERE - President Elizabeth Promises to Fix What Others Broke
@@ -292,7 +292,7 @@ The Voice:
 @NinaRodriguez_BNC (8.9K likes)
 &quot;&#39;She&#39;s inexperienced&#39; - you mean she didn&#39;t help create the conditions that caused the war? &#39;She doesn&#39;t know how things work&#39; - GOOD. How things worked led to collapse. #TimeForChange&quot;
 @IsaacTurner47 (7.6K likes)
-&quot;8 years of reconstruction government. What do we have? 23% unemployment, Covid-49, recession. They had their chance to rebuild properly. They failed. Try something new. #TimeForChange&quot;
+&quot;8 years of reconstruction government. What do we have? {$unemployment}% unemployment, Covid-49, recession. They had their chance to rebuild properly. They failed. Try something new. #TimeForChange&quot;
 @GraceKim_Voice (6.8K likes)
 &quot;The Treaty was supposed to be a fresh start. Instead we got the same old politicians recycled into new parties. Roberts&#39; party is actually NEW. Give them a chance. #TimeForChange&quot;
 @OliverMills_BNC (5.9K likes)
@@ -301,7 +301,7 @@ The Voice:
 
 #BrancaFirst (134K posts)
 @GeneralVoice_BNC (13.1K likes)
-&quot;23% unemployment. Food up 35%. Covid-49 deaths climbing. And we&#39;re STILL taking refugees from Wakuda&#39;s collapse? Branca citizens must come FIRST. Close the borders. #BrancaFirst&quot;
+&quot;{$unemployment}%unemployment. Food up {$foodPrices}%. Covid-49 deaths climbing. And we&#39;re STILL taking refugees from Wakuda&#39;s collapse? Branca citizens must come FIRST. Close the borders. #BrancaFirst&quot;
 @SaraConnor_Patriot (10.5K likes)
 &quot;I&#39;ve applied to 63 jobs in 4 months. SIXTY-THREE. Meanwhile immigrants who came during reconstruction are working. Our people are starving. Fix THIS first. #BrancaFirst&quot;
 @MarkusSteel_BNC (9.1K likes)
@@ -948,7 +948,7 @@ The Voice:
 @AnnaVolkova47 (11.4K likes): &quot;We have a government obsessed with a single problem while everything else spirals out of control. #CrisesIgnored&quot;
 
 #UnemploymentCrisis (101K posts)
-@PatriotFirst_BNC (13.5K likes): &quot;23% unemployed in Branca. This is catastrophic. We need solutions now. #UnemploymentCrisis&quot;
+@PatriotFirst_BNC (13.5K likes): &quot;{$unemployment}% unemployed in Branca. This is catastrophic. We need solutions now. #UnemploymentCrisis&quot;
 @VladimirK_Truth (11.1K likes): &quot;People are struggling to find work, we need initiatives immediatley. #UnemploymentCrisis&quot;
 @AlexandraW_47 (9.7K likes): &quot;Families are anxious, youth without prospects. This is the real Branca. #UnemploymentCrisis&quot;
 @PeterMorozov47 (8.3K likes): &quot;Unemployment is the number one threat to recovery. Everyone knows it. #UnemploymentCrisis&quot;
@@ -1055,7 +1055,7 @@ The Voice:
 @AnnaVolkova47 (11.4K likes): &quot;We have a government obsessed with a single problem while everything else spirals out of control. #CrisesIgnored&quot;
 
 #RisingPrices (101K posts)
-@EconomyWatch_BNC (12.1K likes): &quot;Food prices are up 35%, rents keep climbing, and wages barely move. People are struggling. #RisingPrices&quot;
+@EconomyWatch_BNC (12.1K likes): &quot;Food prices are up {$foodPrices}%, rents keep climbing, and wages barely move. People are struggling. #RisingPrices&quot;
 @ClaraOrtiz92 (10.7K likes): &quot;Basic necessities are out of reach for many families. Inflation is crushing the average Brancan household. #RisingPrices&quot;
 @RajPatel_BNC (9.9K likes): &quot;Everything from bread to electricity is skyrocketing. The numbers don’t lie, Branca’s economy is bleeding citizens. #RisingPrices&quot;
 @GraceKim_Voice (8.4K likes): &quot;Stores report shortages, prices fluctuate daily. Middle-class families are disappearing fast. #RisingPrices&quot;
@@ -1393,6 +1393,7 @@ Viktor : Okay. I will get the immigration department working on it.
 
 </tw-passagedata><tw-passagedata pid="72" name="3031" tags="" position="3150,1075" size="100,100">$choice: &quot;B&quot;
 $reformer: $reformer+5
+$corpSupport: $corpSupport+2
 $decisiveness: $decisiveness+5
 $publicSupport: $publicSupport-3
 $viktorPower: $viktorPower+7
@@ -1424,6 +1425,60 @@ Message from:
 Viktor : I can not say that I am not disappointed.
 [[.|p3044]]</tw-passagedata><tw-passagedata pid="75" name="Result1" tags="" position="3275,25" size="100,100">$day: $day+$dayToAdvance
 --
+[JavaScript] in progress
+var pdays = engine.state.get(&quot;$dayToAdvance&quot;)
+var priority = engine.state.get(&quot;$priority&quot;)
+var choice = engine.state.get(&quot;$choice&quot;)
+if(choice == &quot;C&quot;)
+{
+	if(pdays == 3)
+	{
+		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
+		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+	}
+    else if(pdays == 7)
+	{
+		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
+		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+	}
+    else if(pdays == 10)
+	{
+		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
+		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+	}
+    else if(pdays == 14)
+	{
+		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
+		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+	}
+    else if(pdays == 21)
+	{
+		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
+		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+	}
+    
+}
+else if(&quot;pdays == 7&quot;)
+{
+engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
+engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+}
+else if(&quot;pdays == 10&quot;)
+{
+engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
+engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+}
+else if(&quot;pdays == 14&quot;)
+{
+engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
+engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+}
+else if(&quot;pdays == 21&quot;)
+{
+engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
+engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+}
+[continued]
 [if ($choice === &quot;C&quot;)]
 {embed passage: &#39;R1C&#39;}
 [else]
@@ -1452,7 +1507,12 @@ Viktor : I can not say that I am not disappointed.
 &quot;I&#39;m 16. I shouldn&#39;t have to know this many ways to make rice stretch for a week. But here we are. At least we&#39;re helping each other. #BrancaRecipeSwap&quot;
 @FormerChef_BNC (11.7K likes)
 &quot;Used to run a restaurant. Now teaching people how to make meals from scraps. Never thought I&#39;d be here but glad I can help. Full recipe list in the comments #BrancaRecipeSwap&quot;
-[[.|p4000]]</tw-passagedata><tw-passagedata pid="76" name="p3034" tags="" position="2000,1200" size="100,100">Message to:
+[if ($choice === &quot;C&quot;)]
+[[.|p4001]]
+[else]
+[[.|p4000]]
+[continue]
+</tw-passagedata><tw-passagedata pid="76" name="p3034" tags="" position="2000,1200" size="100,100">Message to:
 Marcus : What are our options here? 
 Message from:
 Marcus : Either we take a loan from the Central Banking Authority and we repay it once the projects become profitable
@@ -1567,9 +1627,181 @@ Sara : I will start discussing this with Dr. Elena and Dr. Jun immediately.
 
 [[GoodLuck|p3043]]
 
-</tw-passagedata><tw-passagedata pid="85" name="p4000" tags="" position="3500,100" size="100,100">$dayToAdvance: 2
+</tw-passagedata><tw-passagedata pid="85" name="p4000" tags="" position="3675,25" size="100,100">$dayToAdvance: 2
 --
-</tw-passagedata><tw-passagedata pid="86" name="R1AUnemployment" tags="" position="3300,400" size="100,100"></tw-passagedata><tw-passagedata pid="87" name="R1AInflation" tags="" position="3300,525" size="100,100"></tw-passagedata><tw-passagedata pid="88" name="R1AHealthcare" tags="" position="3300,650" size="100,100"></tw-passagedata><tw-passagedata pid="89" name="R1AImmigration" tags="" position="3300,775" size="100,100"></tw-passagedata><tw-passagedata pid="90" name="R1C" tags="" position="3325,150" size="100,100">$publicSupport: $publicSupport-3
+</tw-passagedata><tw-passagedata pid="86" name="R1AUnemployment" tags="" position="3300,400" size="100,100">National Standard: 
+Headline: Government Enacts Corporate Hiring Tax to Protect Brancan Workers
+Article: After {$dayToAdvance} days of internal coordination and regulatory preparation, the administration has enacted a new corporate hiring tax aimed at prioritizing Brancan citizens in the labor market. Under the policy, companies will face increased taxation when hiring non-Brancan residents, making domestic labor comparatively cheaper even at higher wages.
+Officials argue the measure corrects long-standing distortions in the job market that disadvantaged citizens during years of post-war labor inflows. Early government briefings frame the move as a “temporary labor correction” designed to stabilize employment figures without direct state expansion.
+Corporate representatives have expressed concern over flexibility and competitiveness, while labor groups welcomed the announcement as a long-overdue intervention. The government maintains that the policy will be monitored closely and adjusted if economic side effects emerge.
+
+Public Index: 
+Headline: Government Implements Corporate Hiring Tax After {$day} days in office
+Article: The administration, after {$day} days in office has enacted a revised corporate tax framework designed to prioritize Brancan citizens in domestic hiring. Under the new rules, corporations employing Non-Brancan labor face significantly higher taxation, while hiring Brancan citizens remains economically favorable even at higher wage levels.
+Officials argue the policy corrects long-standing labor imbalances and ensures national recovery benefits citizens first. Corporate representatives have acknowledged the clarity of the framework but warned of adjustment costs during the transition period.
+[if $publicIndexSupport &gt; 0]
+Public response has been largely supportive, with many viewing the policy as a firm defense of domestic labor during a prolonged economic downturn.
+[else]
+Critics call it a blunt instrument with worse consequences, warning it may accelerate automation, outsourcing, and quiet corporate withdrawal.
+[continue]
+
+The Voice:
+#BrancanJobsFirst (428K posts)
+@northbridge_ian (34.2K likes)
+&quot;About time hiring here actually benefits people who live here. I don’t care how they do it. Just stop locking us out of our own job market. #BrancanJobsFirst&quot;
+@lena_writes (27.9K likes)
+&quot;My brother finally got a contract today after 6 months of nothing. Company admitted it was cheaper now. Say what you want, it worked. #BrancanJobsFirst&quot;
+@markus91 (22.4K likes)
+&quot;This policy is harsh but predictable. Businesses will adapt. Workers needed this leverage years ago. #BrancanJobsFirst&quot;
+@quietobserver77 (18.6K likes)
+&quot;Not celebrating yet, but at least the incentives finally point in the right direction. Let’s see if it lasts. #BrancanJobsFirst&quot;
+@oldcity_rina (14.3K likes)
+&quot;Feels weird seeing companies suddenly ‘discover’ local talent. Funny how money changes values. #BrancanJobsFirst&quot;
+
+#WorkNotWords (391K posts)
+@daily_signal (29.1K likes)
+&quot;People don’t need speeches. They need jobs. Any policy that puts people back to work deserves a fair chance. #WorkNotWords&quot;
+@henrik_l (24.7K likes)
+&quot;Results &gt; ideology. If unemployment goes down, the argument is over. #WorkNotWords&quot;
+@cass_m (21.3K likes)
+&quot;I don’t care who gets credit. I care if my rent gets paid. #WorkNotWords&quot;
+@jonas_field (17.9K likes)
+&quot;Judge this government by outcomes, not intentions. Employment numbers will tell the story. #WorkNotWords&quot;
+@elise_k (13.5K likes)
+&quot;Finally feels like policy is touching real life again. That alone matters. #WorkNotWords&quot;
+
+#CorporateExitRisk (312K posts)
+@sectorwatch (26.8K likes)
+&quot;Multiple firms already reviewing staffing models. This tax may protect jobs short-term but risks long-term investment. #CorporateExitRisk&quot;
+@v_morrison (22.1K likes)
+&quot;Everyone cheering until companies automate or relocate quietly. These moves don’t make headlines. #CorporateExitRisk&quot;
+@dataframe (19.4K likes)
+&quot;Labor pressure works… until capital finds another country. History is clear on this. #CorporateExitRisk&quot;
+@rhea_s (15.6K likes)
+&quot;Not saying it’s wrong, just saying the second-order effects better be planned for. #CorporateExitRisk&quot;
+@midnightpolicy (12.2K likes)
+&quot;This policy buys time. The question is whether the government uses it wisely. #CorporateExitRisk&quot;</tw-passagedata><tw-passagedata pid="87" name="R1AInflation" tags="" position="3300,525" size="100,100">National Standard: 
+Headline: State Intervenes as Price Controls and Rationing Take Effect
+Article: Following {$dayToAdvance} days of emergency coordination, the government has implemented price regulations on staple foods alongside a temporary rationing system intended to shield households from inflationary pressure.
+Officials described the intervention as limited and corrective, stressing that the state does not intend to permanently replace market mechanisms. The policy targets essential goods only, with enforcement delegated to regional authorities.
+While MegaCorp&#39;s distributors and large suppliers voiced concerns over margins and logistics, the administration maintains that short-term intervention is necessary to prevent broader social instability. Monitoring committees have been established to assess market behavior and supply levels
+
+Public Index: 
+Headline: Government Enacts Food Price Controls and Rationing After {$dayToAdvance} Days
+Article: In response to accelerating inflation, the administration has introduced temporary price controls on staple foods alongside a national rationing system. The measures were finalized after {$dayToAdvance} days of deliberation and coordination with distributors.
+Officials describe the intervention as a short-term shield for households while supply chains stabilize. Enforcement mechanisms have been established to prevent hoarding and price circumvention.
+[if $publicIndexSupport &gt; 0]
+Many citizens describe the move as necessary protection, emphasizing predictability over market volatility.
+[else]
+Critics warn the policy carries worse consequences, citing historical risks of shortages, black markets, and long-term supply damage.
+[continue]
+The Voice:
+#PriceControls (389K posts)
+@WorkingClassHero_BNC (35.4K likes)
+&quot;Government FINALLY doing something about corporate price gouging. MegaCorp has been bleeding us dry. About time someone stood up to them. #PriceControls&quot;
+@BusinessOwner_47 (31.1K likes)
+&quot;Price controls have NEVER worked in history. This is economic suicide. Shortages incoming in 3...2...1... #PriceControls&quot;
+@EconomicsProf_BNC (26.7K likes)
+&quot;Price controls without addressing supply issues = shortages. Basic economics. This will backfire spectacularly. #PriceControls&quot;
+@DesperateMom_BNC (24.3K likes)
+&quot;I don&#39;t care about economic theory. I care that I can afford to feed my kids. If this works even for a few months, it&#39;s worth it. #PriceControls&quot;
+@MarketAnalyst_BNC (20.9K likes)
+&quot;MegaCorp stocks will go down to exponentially. Either this is brilliant or catastrophic. No middle ground here. #PriceControls&quot;
+
+#FoodCrisisNow (334K posts)
+@SingleDad_Branca (29.8K likes)
+&quot;Food prices up {$foodPrices}%. My salary hasn&#39;t changed. Something had to give. Glad the President is finally addressing this. #FoodCrisisNow&quot;
+@FarmerJohn_BNC (25.2K likes)
+&quot;You all realize price controls means farmers can&#39;t make profit, right? Who&#39;s going to grow food if it&#39;s not economically viable? Think this through. #FoodCrisisNow&quot;
+@CommunityOrganizer (22.1K likes)
+&quot;People are choosing between rent and food. Between medicine and meals. This isn&#39;t sustainable. Something had to be done. #FoodCrisisNow&quot;
+@RetiredEconomist (19.4K likes)
+&quot;Seen this playbook before the war in my country and many others. Step 1: Price controls. Step 2: Shortages. Step 3: Black markets. Step 4: Worse crisis. #FoodCrisisNow&quot;
+@TeenagerVoice_BNC (16.7K likes)
+&quot;My generation has lived through the war, pandemics, and now this. All problems caused by the previous generation. At least someone&#39;s trying SOMETHING. Can&#39;t be worse than starving. #FoodCrisisNow&quot;</tw-passagedata><tw-passagedata pid="88" name="R1AHealthcare" tags="" position="3300,650" size="100,100">National Standard: 
+Headline: Stricter Lockdown Measures Enforced as Government Prioritizes Hospital Capacity
+Article: After {$dayToAdvance} days of preparation and legal coordination, stricter lockdown measures are now in force nationwide, backed by increased police enforcement and higher penalties for violations.
+The government stated that the decision was driven by sustained pressure on hospitals and rising fatality numbers. Officials described the lockdown as a containment tool designed to buy time for the healthcare system, rather than a long-term solution.
+Business groups warned of economic fallout, while public health officials defended the move as necessary under current conditions. The administration has not ruled out adjustments should healthcare capacity stabilize sooner than expected.
+
+Public Index: 
+Headline: Strict Lockdown Enforcement Begins
+Article: After {$dayToAdvance} days of planning, the government has authorized intensified lockdown enforcement, including expanded police presence and substantial fines for violations. The policy aims to reduce hospital load to sustainable levels.
+Authorities state the measures are temporary and will be reviewed once healthcare capacity stabilizes.
+[if $publicIndexSupport &gt; 0]
+Supporters argue the policy prioritizes lives over convenience during a national emergency.
+[else]
+Critics describe the approach as producing worse social and economic consequences than the virus itself.
+[continue]
+The Voice:
+ #Lockdown (312K posts)
+@ExhaustP_BNC (35.7K likes)
+&quot;Stricter lockdown. Kids home can&#39;t even go to the park. Can&#39;t work from home with toddlers. Savings gone. Mental health destroyed. When does this end? #Lockdown&quot;
+@JessicaNurse (32.4K likes)
+&quot;THANK YOU President Roberts. The last ICU bed at my hospital was also filled yesterday. We were breaking. This lockdown will save lives. It&#39;s the right call. #Lockdown&quot;
+@JohnPizzaGuy (28.9K likes)
+&quot;My father saved the restaurant from three lockdowns and a WAR in the last 30 years. But we don&#39;t have the money for such a strict lockdown. This one will finish us. We&#39;re done. #Lockdown&quot;
+@ScienceGuy_BNC (25.1K likes)
+&quot;Lockdowns work. Every country that did this saw death rates drop during Covid 19, RSV 1 and RSV 2. Covid 49 is no different.  Yes it&#39;s hard. Yes it hurts. But it saves lives. #Lockdown&quot;
+@NostaAgain (21.8K likes)
+&quot;Authoritarian government control over our lives. This is how democracy dies. One &#39;emergency measure&#39; at a time. #Lockdown&quot;
+
+#SaveLivesNow (245K posts)
+@GinaTaylor_2020 (33.2K likes)
+&quot;My husband survived 3 pandemics due to lockdown, but died of Covid-49 last week. If the lockdown had happened sooner, maybe he&#39;d still be here. Do it. Save lives. #SaveLivesNow&quot;
+@EconomicCrisis_BNC (29.5K likes)
+&quot;Saving lives by destroying livelihoods? People will die from poverty, suicide, delayed medical care. There&#39;s no simple answer here. #SaveLivesNow&quot;
+@MedicalEthicist_47 (26.7K likes)
+&quot;We&#39;re making impossible choices: economic collapse vs deaths. There&#39;s no &#39;right&#39; answer, only less-bad options. #SaveLivesNow&quot;
+@YangChang_BNC (22.3K likes)
+&quot;I&#39;m 24 and healthy. Why am I locked down? Let us work to fix the economy, let the vulnerable isolate to limit infection. This one-size-fits-all approach is broken. #SaveLivesNow&quot;
+@ProfAdamKnelt (19.8K likes)
+&quot;Short-term lockdown to prevent hospital system collapse is basic pandemic management. Yes it hurts. No it&#39;s not forever. #SaveLivesNow&quot;
+
+</tw-passagedata><tw-passagedata pid="89" name="R1AImmigration" tags="" position="3300,775" size="100,100">_fakunemp: $unemployment+2
+--
+National Standard: 
+Headline: Government Orders Mass Deportations as Border Security Tightens 
+Article: Following {$dayToAdvance} days of internal coordination, the administration has announced a comprehensive migration enforcement policy, including immediate border closures and large-scale deportations of non-Brancan residents without permanent legal status.
+In a virtual press conference, Migration Minister General Viktor defended the decision as a matter of national stability.
+“Branca cannot afford hesitation,” Viktor stated. “Every state has the right to protect its borders, its labor market, and its social cohesion. This is not cruelty. This is necessity.”
+Security forces have been authorized to assist civil authorities in enforcement, with officials confirming that deportations will begin immediately. The government framed the move as a temporary but decisive response to rising refugee numbers.
+Critics warn of labor shortages and long-term diplomatic consequences.
+
+Public Index: 
+Headline: Government Executes Mass Deportation Policy
+Article: Following {$dayToAdvance} days of coordination, the government has begun large-scale deportations of undocumented migrants. In a virtual press conference, General Viktor defended the decision as a matter of national security and institutional capacity.
+“The state cannot function without enforceable boundaries,” Migration Minister General Viktor stated, emphasizing order and deterrence.
+[if $publicIndexSupport &gt; 0]
+Supporters praise the decisiveness, calling it a restoration of authority and control.
+[else]
+Critics say the policy carries worse humanitarian and economic consequences, warning of labor gaps and international backlash.
+[continue]
+
+The Voice:
+#BrancaFirst (334K posts)
+@NationalistVoice_BNC (41.2K likes)
+&quot;FINALLY. President Roberts closes the borders. Branca for Brancans. This is what we voted for. #BrancaFirst&quot;
+@HR_BNC (36.8K likes)
+&quot;Families being torn apart. Children separated from parents. This is a humanitarian catastrophe disguised as border security. #BrancaFirst&quot;
+@UnempJohn_47 (32.4K likes)
+&quot;{_fakunemp}% unemployment and we&#39;re still taking in refugees? Close the borders, deport the illegal workers, give jobs to CITIZENS. Thank you President Roberts. #BrancaFirst&quot;
+@BradsFarm_09 (28.7K likes)
+&quot;This is economic suicide. 60% of my farm workers are immigrants. Who&#39;s going to harvest the crops? Citizens won&#39;t do this work. #BrancaFirst&quot;
+@ViktorForBNC (25.3K likes)
+&quot;General Viktor has been right all along. Strong borders, strong nation. President Roberts finally listening to the people. #BrancaFirst&quot;
+
+#DeportationWatch (297K posts)
+@ImranBrad (38.5K likes)
+&quot;Deportations started this morning. Families waking up to raids. This is not who we are. This is not what Branca should be. #DeportationWatch&quot;
+@Larry_BNC_90 (33.1K likes)
+&quot;They&#39;re here illegally. Deportation is not cruel - it&#39;s enforcing the law. If you want different laws, change them. #DeportationWatch&quot;
+@KellyFarms (29.4K likes)
+&quot;Just lost half my workforce to deportations. Crops will rot in the fields. Food prices about to skyrocket. Did anyone think this through? #DeportationWatch&quot;
+@LinChang_47 (26.2K likes)
+&quot;These are people who fled war and disaster. We&#39;re sending them back to death. Our grandchildren will ask what we did. What will we say? #DeportationWatch&quot;
+@SafeBNC_All6 (22.8K likes)
+&quot;National security requires border control. Every country has the right to control who enters. This is basic sovereignty. #DeportationWatch&quot;</tw-passagedata><tw-passagedata pid="90" name="R1C" tags="" position="3325,150" size="100,100">$publicSupport: $publicSupport-3
 --
 [if $mediaKnows]
 {embed passage: &#39;R1CKnow&#39;}
@@ -1684,21 +1916,283 @@ The Voice:
 [continue]
 [if ($priority === &quot;healthcare&quot;)]
 {embed passage: &#39;R1AHealthcare&#39;}
+#RisingPrices (221K posts)
+@EconomyWatch_BNC (21.1K likes): &quot;Food prices are up {$foodPrices}%, rents keep climbing, and wages barely move. People are struggling. #RisingPrices&quot;
+@ClaraOrtiz92 (19.7K likes): &quot;Basic necessities are out of reach for many families. Inflation is crushing the average Brancan household. #RisingPrices&quot;
+@RajPatel_BNC (17.9K likes): &quot;Everything from bread to electricity is skyrocketing. The numbers don’t lie, Branca’s economy is bleeding citizens. #RisingPrices&quot;
+@GraceKim_Voice (14.4K likes): &quot;Stores report shortages, prices fluctuate daily. Middle-class families are disappearing fast. #RisingPrices&quot;
+@PeterMorozov47 (10.8K likes): &quot;Small business owners are shutting down because costs are uncontrollable. Inflation is the silent crisis Branca can’t ignore. #RisingPrices&quot;
 [continue]
 [if ($priority === &quot;inflation&quot;)]
 {embed passage: &#39;R1AInflation&#39;}
+#UnemploymentCrisis (221K posts)
+@PatriotFirst_BNC (23.5K likes): &quot;{$unemployment}% unemployed in Branca. This is catastrophic. We need solutions now. #UnemploymentCrisis&quot;
+@VladimirK_Truth (21.1K likes): &quot;People are struggling to find work, we need initiatives immediatley. #UnemploymentCrisis&quot;
+@AlexandraW_47 (19.7K likes): &quot;Families are anxious, youth without prospects. This is the real Branca. #UnemploymentCrisis&quot;
+@PeterMorozov47 (18.3K likes): &quot;Unemployment is the number one threat to recovery. Everyone knows it. #UnemploymentCrisis&quot;
+@LucasMoreno47 (12.9K likes): &quot;{$day} days in and this problem has not even been addressed. #UnemploymentCrisis&quot;
 [continue]
 [if ($priority === &quot;immigration&quot;)]
 {embed passage: &#39;R1AImmigration&#39;}
+#HealthcareCrisis (221K posts)
+@HealthWatch_BNC (21.3K likes): &quot;Hospitals are still over capacity. ICU beds are filled and staff are exhausted. Branca cannot afford another wave. #HealthcareCrisis&quot;
+@SofiaDurand (19.9K likes): &quot;Vaccination delays, ambulance shortages, clinics closing early. People are literally waiting for care. #HealthcareCrisis&quot;
+@MarcusChen47 (18.5K likes): &quot;The numbers don’t lie: Something has to change or lives will be lost unnecessarily. #HealthcareCrisis&quot;
+@LucasMoreno47 (17.8K likes): &quot;Waiting times for surgeries are months now. Covid-49 is still killing daily. Branca’s healthcare is at breaking point. #HealthcareCrisis&quot;
+@AnnaVolkova47 (12.2K likes): &quot;Doctors are working double shifts. Hospitals report shortages of basic equipment. This isn’t sustainable. #HealthcareCrisis&quot;
 [continue]</tw-passagedata><tw-passagedata pid="95" name="R1B" tags="" position="3100,550" size="100,100">[if ($priority === &quot;unemployment&quot;)]
 {embed passage: &#39;R1BUnemployment&#39;}
 [continue]
 [if ($priority === &quot;healthcare&quot;)]
 {embed passage: &#39;R1BHealthcare&#39;}
+#RisingPrices (221K posts)
+@EconomyWatch_BNC (21.1K likes): &quot;Food prices are up {$foodPrices}%, rents keep climbing, and wages barely move. People are struggling. #RisingPrices&quot;
+@ClaraOrtiz92 (19.7K likes): &quot;Basic necessities are out of reach for many families. Inflation is crushing the average Brancan household. #RisingPrices&quot;
+@RajPatel_BNC (17.9K likes): &quot;Everything from bread to electricity is skyrocketing. The numbers don’t lie, Branca’s economy is bleeding citizens. #RisingPrices&quot;
+@GraceKim_Voice (14.4K likes): &quot;Stores report shortages, prices fluctuate daily. Middle-class families are disappearing fast. #RisingPrices&quot;
+@PeterMorozov47 (10.8K likes): &quot;Small business owners are shutting down because costs are uncontrollable. Inflation is the silent crisis Branca can’t ignore. #RisingPrices&quot;
 [continue]
 [if ($priority === &quot;inflation&quot;)]
 {embed passage: &#39;R1BInflation&#39;}
+#UnemploymentCrisis (221K posts)
+@PatriotFirst_BNC (23.5K likes): &quot;{$unemployment}% unemployed in Branca. This is catastrophic. We need solutions now. #UnemploymentCrisis&quot;
+@VladimirK_Truth (21.1K likes): &quot;People are struggling to find work, we need initiatives immediatley. #UnemploymentCrisis&quot;
+@AlexandraW_47 (19.7K likes): &quot;Families are anxious, youth without prospects. This is the real Branca. #UnemploymentCrisis&quot;
+@PeterMorozov47 (18.3K likes): &quot;Unemployment is the number one threat to recovery. Everyone knows it. #UnemploymentCrisis&quot;
+@LucasMoreno47 (12.9K likes): &quot;{$day} days in and this problem has not even been addressed. #UnemploymentCrisis&quot;
 [continue]
 [if ($priority === &quot;immigration&quot;)]
 {embed passage: &#39;R1BImmigration&#39;}
-[continue]</tw-passagedata><tw-passagedata pid="96" name="R1BInflation" tags="" position="3450,525" size="100,100"></tw-passagedata><tw-passagedata pid="97" name="R1BUnemployment" tags="" position="3450,400" size="100,100"></tw-passagedata><tw-passagedata pid="98" name="R1BHealthcare" tags="" position="3450,650" size="100,100"></tw-passagedata><tw-passagedata pid="99" name="R1BImmigration" tags="" position="3450,775" size="100,100"></tw-passagedata></tw-storydata></html>
+#HealthcareCrisis (221K posts)
+@HealthWatch_BNC (21.3K likes): &quot;Hospitals are still over capacity. ICU beds are filled and staff are exhausted. Branca cannot afford another wave. #HealthcareCrisis&quot;
+@SofiaDurand (19.9K likes): &quot;Vaccination delays, ambulance shortages, clinics closing early. People are literally waiting for care. #HealthcareCrisis&quot;
+@MarcusChen47 (18.5K likes): &quot;The numbers don’t lie: Something has to change or lives will be lost unnecessarily. #HealthcareCrisis&quot;
+@LucasMoreno47 (17.8K likes): &quot;Waiting times for surgeries are months now. Covid-49 is still killing daily. Branca’s healthcare is at breaking point. #HealthcareCrisis&quot;
+@AnnaVolkova47 (12.2K likes): &quot;Doctors are working double shifts. Hospitals report shortages of basic equipment. This isn’t sustainable. #HealthcareCrisis&quot;
+[continue]</tw-passagedata><tw-passagedata pid="96" name="R1BInflation" tags="" position="3450,525" size="100,100">National Standard: 
+Headline: Emergency Food Subsidies Implemented to Ease Cost-of-Living Pressures
+Article: The government has completed the rollout of emergency food subsidies following {$dayToAdvance} days of coordination, aiming to shield households from sustained increases in staple food prices.
+Funding for the subsidies will be sourced
+[if $loan === &quot;none&quot;]
+through temporary wealth taxes, with officials arguing that extraordinary conditions require extraordinary contributions.
+[else]
+via a loan secured from {$loan}, described by the administration as a short-term stabilization tool rather than a structural dependency.
+[continue]
+Authorities reiterated that the subsidies are explicitly temporary and will be reduced once inflation indicators stabilize. While the move has been welcomed by consumer groups, economists remain divided on its long-term inflationary effects if extended.
+
+Public Index: 
+Headline: Emergency Food Subsidies Rolled Out
+Article: Following {$dayToAdvance} days of preparation, the government has introduced emergency food subsidies aimed at offsetting rising prices without direct market controls. The program provides targeted financial relief to households while allowing retailers to operate freely.
+Officials stress that subsidies are temporary and will be withdrawn once inflationary pressures subside.
+[if $publicIndexSupport &gt; 0]
+Public reaction has been cautiously positive, with many reporting immediate relief at grocery counters.
+[else]
+Critics argue the policy merely delays the problem, calling it a costly measure with worse inflationary consequences later.
+[continue]
+#FoodSubsidies (367K posts)
+@ReliefAtLast_BNC (34.2K likes)
+&quot;Government subsidizing food prices means I can actually afford groceries this month. I don&#39;t care how they&#39;re paying for it. My kids need to eat. #FoodSubsidies&quot;
+@FiscalHawk_BNC (29.7K likes)
+&quot;Who&#39;s paying for these subsidies? Spoiler: we are, through debt our grandchildren will inherit. This is robbing the future to pay for today. #FoodSubsidies&quot;
+@PolicyWonk_47 (24.3K likes)
+&quot;Subsidies don&#39;t fix the underlying problem - MegaCorp&#39;s monopoly and supply chain issues. This is a bandaid on a gunshot wound. #FoodSubsidies&quot;
+@GratefulCitizen_BNC (21.8K likes)
+&quot;Finally some relief. Food prices dropped at my local store today. Government doing what it&#39;s supposed to do - helping people survive. #FoodSubsidies&quot;
+@DebtClock_BNC (18.5K likes)
+&quot;National debt just increased by $1.2B. Where does this end? How long can we keep borrowing to subsidize everything? #FoodSubsidies&quot;
+[if $loan === &quot;none&quot;]
+#TaxTheRich (298K posts)
+@WorkerSolidarity (31.5K likes)
+&quot;Government funding food subsidies by taxing corporations and the wealthy. THIS IS HOW IT SHOULD WORK. Make them pay their fair share. #TaxTheRich&quot;
+@WBrancan_47 (27.2K likes)
+&quot;Just got hit with emergency wealth tax. I am not wealthy in any sense. Thanks for punishing the middle class. I&#39;ll move my assets to Al-Mutahida like the rich. #TaxTheRich&quot;
+@EconomicJustice_BNC (23.8K likes)
+&quot;MegaCorp executives made $400M last year while we starve. Tax them. Use it to feed people. It&#39;s not complicated. #TaxTheRich&quot;
+@TaxAccountant_BNC (20.1K likes)
+&quot;Emergency corporate tax already causing capital flight. Three major companies announced relocation. Short-term help, long-term disaster. #TaxTheRich&quot;
+@YouthMovement_BNC (17.6K likes)
+&quot;Our generation will inherit climate crisis, debt crisis, economic crisis. At LEAST make the rich pay while they&#39;re still here. #TaxTheRich&quot;
+[else]
+#DebtMountains (298K posts)
+@FiscalConservative (31.5K likes)
+&quot;Another loan. More debt. When does this end? We&#39;re mortgaging our future for temporary relief. This is unsustainable. #DebtMountains&quot;
+@ReliefFirst_BNC (27.2K likes)
+&quot;People criticizing debt while children go hungry. Priorities, people. We can worry about debt when everyone has food. #DebtMountains&quot;
+@BankingAnalyst_47 (23.8K likes)
+&quot;CBA now has significant leverage over government policy. When you owe the bank billions, they own you. This is how democracies lose autonomy. #DebtMountains&quot;
+@PragmaticVoter_BNC (20.1K likes)
+&quot;Every government in history has taken on debt. It&#39;s called investment. As long as we use it wisely, debt isn&#39;t the enemy. #DebtMountains&quot;
+@OppositionVoice_Official (17.6K likes)
+&quot;President Roberts racking up debt while offering no long-term economic plan. This is fiscal irresponsibility disguised as compassion. Adam Volkov is my leader, he warned about this during the campaigns. #DebtMountains&quot;
+[continue]</tw-passagedata><tw-passagedata pid="97" name="R1BUnemployment" tags="" position="3450,400" size="100,100">National Standard: 
+Headline: Government Launches Public Works Program to Absorb Joblessness
+Article: After {$dayToAdvance} days of preparation, the administration has launched a nationwide public works program aimed at providing job guarantees to unemployed Brancan citizens through state-directed infrastructure and service projects.
+Officials confirmed that the program will be financed
+[if $loan === &quot;none&quot;]
+through emergency corporate and wealth taxation, framed as a temporary redistribution measure tied to economic recovery.
+[else]
+through a loan arrangement with {$loan}, justified by the expectation that completed projects will generate long-term economic returns sufficient to service the debt.
+[continue]
+The government emphasized that the initiative is designed as an investment rather than a permanent expansion of the public sector. Supporters describe it as a visible commitment to employment, while critics caution against fiscal exposure and execution risks.
+
+Public Index: 
+Headline: State Launches Job Guarantee Program Following {$dayToAdvance}-Day Rollout
+Article: The government has formally launched a nationwide public employment initiative, guaranteeing work for Brancan citizens through infrastructure, logistics, and reconstruction projects. The program follows {$dayToAdvance} days of preparation and initial funding allocation.
+Officials state that while upfront investment is required, long-term returns from completed projects are expected to offset costs. Early deployments include transportation repairs, public housing, and municipal services.
+[if $publicIndexSupport &gt; 0]
+Supporters highlight the immediate dignity of paid work, pointing to visible progress and restored income stability.
+[else]
+Critics call it an expensive stopgap, arguing the program risks becoming permanent state dependency rather than sustainable employment.
+[continue]
+
+The Voice:
+#WorkNotWords (391K posts)
+@daily_signal (29.1K likes)
+&quot;People don’t need speeches. They need jobs. Any policy that puts people back to work deserves a fair chance. #WorkNotWords&quot;
+@henrik_l (24.7K likes)
+&quot;Results &gt; ideology. If unemployment goes down, the argument is over. #WorkNotWords&quot;
+@cass_m (21.3K likes)
+&quot;I don’t care who gets credit. I care if my rent gets paid. #WorkNotWords&quot;
+@jonas_field (17.9K likes)
+&quot;Judge this government by outcomes, not intentions. Employment numbers will tell the story. #WorkNotWords&quot;
+@elise_k (13.5K likes)
+&quot;Finally feels like policy is touching real life again. That alone matters. #WorkNotWords&quot;
+
+[if $loan === &quot;none&quot;]
+#TaxTheTop (301K posts)
+@frame_zero (27.8K likes)
+&quot;Public jobs funded without debt. About time wealth did some work. #TaxTheTop&quot;
+@amberloop (22.1K likes)
+&quot;If corporations benefited for decades, they can fund recovery once. #TaxTheTop&quot;
+@quietmark (18.9K likes)
+&quot;No loans. No bailouts. Just redistribution with output. #TaxTheTop&quot;
+@steppewatch (15.4K likes)
+&quot;This is the cleanest version of public spending I’ve seen. #TaxTheTop&quot;
+@bluehour (12.7K likes)
+&quot;Taxes sting less than unemployment. #TaxTheTop&quot;
+[else]
+#BorrowToBuild (301K posts)
+@vector_lane (30.2K likes)
+&quot;Borrowing to build assets isn’t reckless. It’s basic economics. #BorrowToBuild&quot;
+@thinmargin (25.6K likes)
+&quot;At least the loan is tied to real projects, not bailouts. #BorrowToBuild&quot;
+@civicmesh (20.4K likes)
+&quot;Debt for consumption is bad. Debt for infrastructure pays back. #BorrowToBuild&quot;
+@signalroom (16.8K likes)
+&quot;If this fails, criticize it. But don’t pretend inaction was safer. #BorrowToBuild&quot;
+@nightshifted (13.5K likes)
+&quot;This feels wrong to have {$loan} involved like this. #BorrowToBuild&quot;
+[continue]
+#GovernmentJobs (287K posts)
+@elmstreet42 (28.9K likes)
+&quot;Finally seeing work for locals in the public sector. This feels right. #GovernmentJobs&quot;
+@quietforge (23.4K likes)
+&quot;This feels like we are building our great nation once again. We needed this after the war #GovernmentJobs&quot;
+@silverlake88 (19.7K likes)
+&quot;Hired for a public project today. Feels good to actually contribute to the development of Branca. Long live Branca. Long live the president. #GovernmentJobs&quot;
+@cranebridge (15.2K likes)
+&quot;Roberts understood the problem and came up with a solution that is just genius. Creating jobs and building the nation at the same time #GovernmentJobs&quot;
+@lumenview (12.1K likes)
+&quot;We like the whole government jobs thing but the funding for this is huge. This will have consequences. Mark my words. #GovernmentJobs&quot;</tw-passagedata><tw-passagedata pid="98" name="R1BHealthcare" tags="" position="3450,650" size="100,100">National Standard: 
+Headline: Emergency Medical Facilities Activated Through Public–Private Cooperation
+Article: After {$dayToAdvance} days of accelerated preparation, the government has activated a network of emergency medical facilities by converting hotels and convention centers into treatment centers to relieve pressure on hospitals.
+Officials stated that the expansion was enabled
+[if $loan === &quot;none&quot;]
+through emergency corporate and wealth taxation, presented as a temporary measure to preserve public healthcare capacity during the crisis.
+[else]
+through an agreement with {$loan}, involving the provision of funding and medical equipment in exchange for long-term service contracts and regulatory stability. Government representatives emphasized that the arrangement does not constitute a traditional loan, but a strategic partnership under exceptional circumstances.
+[continue]
+The administration framed the move as a pragmatic response to immediate system overload, stressing that emergency facilities will be reassessed once healthcare demand stabilizes.
+
+Public Index: 
+Headline: Emergency Hospitals Open Nationwide After {$dayToAdvance} Days
+Article: The administration has completed the conversion of hotels and convention centers into emergency medical facilities following {$dayToAdvance} days of accelerated construction and procurement. The expansion significantly increases national treatment capacity.
+The initiative relies on borrowed equipment and funding arrangements tied to future healthcare restructuring.
+[if $publicIndexSupport &gt; 0]
+Healthcare workers report immediate relief, citing reduced overload and improved patient triage.
+[else]
+Critics warn of worse long-term consequences, arguing the policy opens the door to creeping healthcare privatization.
+[continue]
+
+The Voice:
+#HospitalExpansion (308K posts)
+@RealEstateWatch_BNC (34.8K likes)
+&quot;Government just commandeered the Grand Hotel for overflow hospital space. Property rights? Anyone? This is concerning. #HospitalExpansion&quot;
+@ICUNurse_Jess (31.2K likes)
+&quot;Finally. More beds, more space, more capacity. We&#39;ve been drowning. This gives us a fighting chance to save more lives. #HospitalExpansion&quot;
+@TPBlaz (27.6K likes)
+&quot;Emergency hospital expansion. Where&#39;s this money coming from? How much debt are we taking on? #HospitalExpansion&quot;
+@CarlDepp_2005 (24.1K likes)
+&quot;Was turned away from hospital last week - no ICU beds. Now they&#39;re expanding capacity. Too late for some, but will save future lives. #HospitalExpansion&quot;
+@JackBill_4 (20.9K likes)
+&quot;Getting called back to work converting convention centers to hospitals. Good pay, good work. At least someone&#39;s creating jobs. #HospitalExpansion&quot;
+
+[if $loan === &quot;none&quot;]
+#TaxTheRich (298K posts)
+@WorkerSolidarity (31.5K likes)
+&quot;Government funding healthcare by taxing corporations and the wealthy. THIS IS HOW IT SHOULD WORK. Make them pay their fair share. #TaxTheRich&quot;
+@WBrancan_47 (27.2K likes)
+&quot;Just got hit with emergency wealth tax. I am not wealthy in any sense. Thanks for punishing the middle class. I&#39;ll move my assets to Al-Mutahida like the rich. #TaxTheRich&quot;
+@EconomicJustice_BNC (23.8K likes)
+&quot;MegaCorp executives made $400M last year while we die from Covid. Tax them. Use it to save lives. It&#39;s not complicated. #TaxTheRich&quot;
+@TaxAccountant_BNC (20.1K likes)
+&quot;Emergency corporate tax already causing capital flight. Three major companies announced relocation. Short-term help, long-term disaster. #TaxTheRich&quot;
+@YouthMovement_BNC (17.6K likes)
+&quot;Our generation will inherit climate crisis, debt crisis, economic crisis. At LEAST make the rich pay while they&#39;re still here. #TaxTheRich&quot;
+[else]
+#CorporateHealthcare (298K posts)
+@Vlad_Activist_3 (32.7K likes)
+&quot;Private medical industry consulted for public healthcare expansion means privatization coming. They don&#39;t give money for free. Public healthcare is being sold off. #CorporateHealthcare&quot;
+@BradVoter_BNC (28.4K likes)
+&quot;Would you rather have no hospital beds or corporate-funded hospital beds? Ideology doesn&#39;t save lives. Take the money, save people. #CorporateHealthcare&quot;
+@MP_Health_Off (25.1K likes)
+&quot;Corporate involvement in healthcare has historically led to profit-over-patients. This collab will have strings attached. Watch. #CorporateHealthcare&quot;
+@BusinessAnalyst_47 (21.7K likes)
+&quot;MegaCorp doesn&#39;t loan out money and equipment for charity. They&#39;re buying future healthcare contracts. This is an investment in their market share. #CorporateHealthcare&quot;
+@DebraCovid_BNC (18.9K likes)
+&quot;I don&#39;t care who builds the hospital as long as there&#39;s a bed when I need one. We can worry about ownership later. #CorporateHealthcare&quot;
+[continue]</tw-passagedata><tw-passagedata pid="99" name="R1BImmigration" tags="" position="3450,775" size="100,100">National Standard: 
+Headline: Government Announces Integration Program as Migration Leadership Changes
+Article: After {$dayToAdvance} days of deliberation, the administration has unveiled a nationwide migrant integration program aimed at accelerating legal processing, work permits, and sector-based employment placement for existing migrant populations.
+The policy was announced alongside a significant leadership change. General Viktor formally resigned from his position as Migration Minister earlier today. The government confirmed that Sara Windsor has been appointed as his successor.
+In a brief statement, Viktor said:
+“I do not believe this approach will secure Branca’s future. For that reason, I am stepping aside.”
+The administration described the integration program as a pragmatic response to labor shortages and administrative overload, emphasizing economic participation and controlled oversight rather than unrestricted entry.
+Markets and corporate representatives reacted positively to the announcement, while nationalist groups criticized the leadership change as a political concession.
+
+Public Index: 
+Headline: Integration Program Announced as Viktor Resigns After {$day} Days
+Article: After {$dayToAdvance} days of internal restructuring, the government unveiled a national integration program focused on legal processing, language training, and workforce inclusion. Concurrently, General Viktor resigned from his post, with Sara Windsor appointed as the new Minister of Migration after {day} days in office.
+Officials framed the change as a strategic reset rather than a retreat.
+[if $publicIndexSupport &gt; 0]
+Supporters call the transition stabilizing and pragmatic, praising reduced tensions and clearer policy direction.
+[else]
+Critics frame the resignation as producing worse political consequences, accusing the government of signaling weakness.
+[continue]
+
+The Voice:
+#PathwayToCitizenship (309K posts)
+@HarryGates_BNC (35.9K likes)
+&quot;President Roberts chose humanity over politics. Integration pathways for refugees and immigrants. This is the right thing to do. #PathwayToCitizenship&quot;
+@BrancaLive_12 (31.4K likes)
+&quot;Unemployment at it&#39;s all time high and she&#39;s giving citizenship to foreigners. She chose THEM over US. This is betrayal. #PathwayToCitizenship&quot;
+@EcoDaily_BNC (27.8K likes)
+&quot;From pure economic standpoint, integrating immigrant labor stabilizes workforce and prevents labor shortages in agriculture and construction. Makes sense. #PathwayToCitizenship&quot;
+@ViktorForPresident (24.1K likes)
+&quot;General Viktor stepped down. Clearly he does not agree with this policy. He is right, this feels wrong with all the problems we already have. #PathwayToCitizenship&quot;
+@FreeWakuda_78 (20.7K likes)
+&quot;After 2 years living in camps, we finally have hope. We want to serve Branca, let us help. Thank you President Roberts for seeing us as human beings and for trusting us. #PathwayToCitizenship&quot;
+
+#WindsorDoctrine (284K posts)
+@northbridge (33.2K likes)
+&quot;Sara Windsor taking over immigration signals a real shift. Less fear, more policy. Let’s see if this actually works. #WindsorDoctrine&quot;
+@atlasfield (29.6K likes)
+&quot;General Petrov resigns, Windsor steps in. This government just made its stance crystal clear. #WindsorDoctrine&quot;
+@oldharbor77 (25.1K likes)
+&quot;Replacing a retired general with a civilian minister is a big gamble during a crisis. Hope idealism doesn’t beat realism. #WindsorDoctrine&quot;
+@sunline_bnc (21.4K likes)
+&quot;Sara Windsor has experience, not slogans. If anyone can manage integration without chaos, it’s her and she has made it very clear today. #WindsorDoctrine&quot;
+@borderwatcher (18.9K likes)
+&quot;This isn’t just about immigration. It’s about who runs the state: soldiers or administrators, nationalists or liberals. #WindsorDoctrine&quot;</tw-passagedata><tw-passagedata pid="100" name="p4001" tags="" position="3675,200" size="100,100">$dayToAdvance: 2
+--
+</tw-passagedata></tw-storydata></html>
