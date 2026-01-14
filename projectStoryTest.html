@@ -240,6 +240,7 @@ $nationalStandardSupport: -1
 
 $path: &quot;none&quot;
 $priority: &quot;none&quot;
+$oldpriority: &quot;none&quot;
 $choice: &quot;none&quot;
 $loan: &quot;none&quot;
 
@@ -252,6 +253,11 @@ $deathToll: 204
 $hardliner: 0
 $reformer: 0
 $decisiveness: 0
+
+$unemploymentCritical: 30
+$inflationCritical: 50
+$healthcareCritical: 98
+$immigrationCritical: 10
 --
 National Standard: 
 Headline: New President Faces Unprecedented Crisis - Can Inexperienced Leadership Handle It?
@@ -323,9 +329,7 @@ The Voice:
 @BusinessCouncil_BNC (5.8K likes)
 &quot;Volkov understood what Branca needs to finish reconstruction: stable markets, business confidence, international trade. Roberts understands... what exactly? #VolkovForBranca&quot;
 
-[[.|p1000]]
-
-[[test|Decision1]] </tw-passagedata><tw-passagedata pid="2" name="p1000" tags="" position="800,100" size="100,100">Message form:
+[[.|p1000]]</tw-passagedata><tw-passagedata pid="2" name="p1000" tags="" position="800,100" size="100,100">Message form:
 Sara : Madam President?
 Message form:
 Sara : Madam President, I like saying that.
@@ -774,7 +778,7 @@ else if(engine.state.get(&quot;$priority&quot;) == &quot;immigration&quot;)
 {
 engine.state.set(&quot;$corpSupport&quot;, corpSupport+1)
 }
-[continued]
+[continue]
 
 Message to:
 Sara : I don&#39;t see a problem with that. We should let them know that {$priority} is our number one priority.
@@ -1211,6 +1215,7 @@ Marcus : Either that or we could start public projects and give job gurantees to
 [[None|p3011]]</tw-passagedata><tw-passagedata pid="52" name="p3011" tags="" position="2100,1075" size="100,100">$choice: &quot;C&quot;
 $decisiveness: $decisiveness-3
 $dayToAdvance: 14
+$publicSupport: $publicSupport-3
 $junTrust: $junTrust+2
 $marcusTrust: $marcusTrust+2
 --
@@ -1220,6 +1225,7 @@ Message from:
 Marcus : Ok. I will start discussing with Dr. Jun immediately. I already had a meeting with MegaCorp coming up. I will try to discuss this with them as well.
 
 [[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="53" name="p3012" tags="" position="1850,1075" size="100,100">$choice: &quot;A&quot;
+$unemployment: $unemployment -1.3
 $decisiveness: $decisiveness+3
 $publicSupport: $publicSupport+3
 $corpSupport: $corpSupport-5
@@ -1231,7 +1237,9 @@ Marcus : I think we should tax the corporations for hiring Non-Brancans.
 Message from:
 Marcus : Ok. I will start discussing this with Dr. Jun immediately. 
 
-[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="54" name="p3013" tags="" position="1975,1075" size="100,100">Message to:
+[[GoodLuck|p3044]]</tw-passagedata><tw-passagedata pid="54" name="p3013" tags="" position="1975,1075" size="100,100">$unemployment: $unemployment - 5.4
+--
+Message to:
 Marcus : I think we should start public projects and hire the unemployed population.
 Message from:
 Marcus : Ok. We have 2 options to finance these projects.
@@ -1253,7 +1261,7 @@ Message to:
 Sara : You too.
 [continue]
 
-[[Result1]]</tw-passagedata><tw-passagedata pid="56" name="p3015" tags="" position="2275,925" size="100,100">Message to:
+[[.|Result1]]</tw-passagedata><tw-passagedata pid="56" name="p3015" tags="" position="2275,925" size="100,100">Message to:
 Jun : What are our options? 
 Message from:
 Jun : Well, we could setup price regulations for staple foods and start a rationing system. We intervene briefly to protect households while markets stabilize.
@@ -1266,6 +1274,7 @@ Jun : Either that or we could start emergency food subsidies. We would need some
 $decisiveness: $decisiveness-5
 $saraLoyality: $saraLoyality+1
 $junTrust: $junTrust+3
+$publicSupport: $publicSupport-4
 $dayToAdvance: 21
 --
 Message to:
@@ -1302,6 +1311,7 @@ Sara : Either that, or we could start converting hotels and convention centers i
 [[Emergency Hospitals|p3022]]
 [[None|p3020]]</tw-passagedata><tw-passagedata pid="61" name="p3020" tags="" position="2850,1075" size="100,100">$choice: &quot;C&quot;
 $decisiveness: $decisiveness-4
+$publicSupport: $publicSupport-3
 $dayToAdvance: 14
 $saraLoyality: $saraLoyality+3
 --
@@ -1314,6 +1324,8 @@ Sara : Ok. I will start discussing with Dr. Elena immediately. I will ask Marcus
 $decisiveness: $decisiveness+4
 $publicSupport: $publicSupport-3
 $corpSupport: $corpSupport-4
+$healthcareLoad: $healthcareLoad -5
+$deathToll: $deathToll - 3
 $dayToAdvance: 3
 --
 Message to:
@@ -1382,6 +1394,7 @@ $publicSupport: $publicSupport+4
 $dayToAdvance: 7
 $saraLoyality: $saraLoyality-8
 $viktorPower: $viktorPower-5
+$refugeeRate: $refugeeRate-3
 --
 Message to:
 Viktor : That is our only option. Let us do it then.
@@ -1423,96 +1436,86 @@ Message to:
 Viktor : I am letting Sara incharge of the department.
 Message from:
 Viktor : I can not say that I am not disappointed.
-[[.|p3044]]</tw-passagedata><tw-passagedata pid="75" name="Result1" tags="" position="3275,25" size="100,100">$day: $day+$dayToAdvance
---
-[JavaScript] in progress
+[[.|p3044]]</tw-passagedata><tw-passagedata pid="75" name="Result1" tags="" position="3275,25" size="100,100">[JavaScript]
 var pdays = engine.state.get(&quot;$dayToAdvance&quot;)
 var priority = engine.state.get(&quot;$priority&quot;)
 var choice = engine.state.get(&quot;$choice&quot;)
+var unemployment = engine.state.get(&quot;$unemployment&quot;)
+var foodPrices = engine.state.get(&quot;$foodPrices&quot;)
+var refugeeRate = engine.state.get(&quot;$refugeeRate&quot;)
+var healthcareLoad = engine.state.get(&quot;$healthcareLoad&quot;)
+var deathToll = engine.state.get(&quot;$deathToll&quot;)
 if(choice == &quot;C&quot;)
 {
-	if(pdays == 3)
+    if(pdays == 14)
 	{
-		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
-		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
-	}
-    else if(pdays == 7)
-	{
-		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
-		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
-	}
-    else if(pdays == 10)
-	{
-		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
-		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
-	}
-    else if(pdays == 14)
-	{
-		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
-		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+    	engine.state.set(&quot;$unemployment&quot;, unemployment+1.4)
+		engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8)
+		engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+30)
 	}
     else if(pdays == 21)
 	{
-		engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
-		engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+		engine.state.set(&quot;$unemployment&quot;, unemployment+2.1)
+		engine.state.set(&quot;$foodPrices&quot;, foodPrices + 2.1)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1.2)
+		engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+7)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+42)
 	}
-    
 }
-else if(&quot;pdays == 7&quot;)
+else
 {
-engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
-engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
+	if(pdays == 3)
+	{
+		engine.state.set(&quot;$unemployment&quot;, unemployment+0.3)
+		engine.state.set(&quot;$foodPrices&quot;, foodPrices+0.3)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.1)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+5)
+	}
+	if(pdays == 7)
+	{
+    	if(priority == &quot;unemployment&quot;)
+		{
+        	if(choice == &quot;A&quot;)
+			{
+				engine.state.set(&quot;$unemployment&quot;, unemployment-0.3)
+            }
+			engine.state.set(&quot;$foodPrices&quot;, foodPrices+0.7)
+			engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.3)
+		}
+        else if(priority == &quot;inflation&quot;)
+		{
+        	engine.state.set(&quot;$unemployment&quot;, unemployment+0.7)
+			engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.3)
+		}
+        else if(priority == &quot;immigration&quot;)
+		{
+        	engine.state.set(&quot;$unemployment&quot;, unemployment+0.7)
+			engine.state.set(&quot;$foodPrices&quot;, foodPrices+0.3)
+            if(choice == &quot;B&quot;)
+			{
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.3)
+            }
+		}
+		engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+	}
+	else if(pdays == 10)
+	{
+		engine.state.set(&quot;$unemployment&quot;, unemployment+0.9)
+		engine.state.set(&quot;$foodPrices&quot;, foodPrices+1)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.5)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+8)
+	}
 }
-else if(&quot;pdays == 10&quot;)
-{
-engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
-engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
-}
-else if(&quot;pdays == 14&quot;)
-{
-engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
-engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
-}
-else if(&quot;pdays == 21&quot;)
-{
-engine.state.set(&quot;$bankSupport&quot;, bankSupport-1)
-engine.state.set(&quot;$corpSupport&quot;, corpSupport-1)
-}
-[continued]
-[if ($choice === &quot;C&quot;)]
-{embed passage: &#39;R1C&#39;}
-[else]
-{embed passage: &#39;R1&#39;}
 [continue]
-#Covid49Memorial (214K posts)
-@HealthcareWorker_BNC (28.9K likes)
-&quot;We lost 8 colleagues this month. EIGHT. All healthcare workers trying to save others. The system is breaking and we&#39;re breaking with it. #Covid49Memorial&quot;
-@GrievingDaughter (22.4K likes)
-&quot;Mom died yesterday. Day {$day} of the new government. She waited for things to get better. They didn&#39;t. She&#39;s gone. I don&#39;t know what to feel anymore. #Covid49Memorial&quot;
-@CommunityStrong_BNC (19.8K likes)
-&quot;Virtual memorial service tonight at 8pm for everyone we lost to Covid-49 this month. Light a candle. Say their names. They mattered. #Covid49Memorial&quot;
-@StatisticsDaily (16.7K likes)
-&quot;Covid-49 deaths this month: 6,000+. That&#39;s more than 6,000 people with families, dreams, futures. Not just numbers. Remember them. #Covid49Memorial&quot;
-@YoungSurvivor_23 (13.9K likes)
-&quot;I survived Covid-49 but my lungs will never be the same. I was young and healthy. This virus doesn&#39;t care. Wear your masks. Please. #Covid49Memorial&quot;
 
-#BrancaRecipeSwap (189K posts)
-@BudgetCookingMom (24.6K likes)
-&quot;Since we&#39;re all broke: Rice + canned beans + whatever spices you have = filling meal for under $2. Been living on this for weeks. Add recipes below#BrancaRecipeSwap&quot;
-@MaKnowsBest_BNC (20.1K likes)
-&quot;War-era recipe from my mother: potato soup that feeds 6 for $3. We survived then, we&#39;ll survive now. Recipe thread: #BrancaRecipeSwap&quot;
-@CommunityKitchen_BNC (17.8K likes)
-&quot;Our community kitchen served 450 people yesterday. We share recipes, ingredients, hope. This is how we survive together. Join us. #BrancaRecipeSwap&quot;
-@TeenageSurvivor (14.3K likes)
-&quot;I&#39;m 16. I shouldn&#39;t have to know this many ways to make rice stretch for a week. But here we are. At least we&#39;re helping each other. #BrancaRecipeSwap&quot;
-@FormerChef_BNC (11.7K likes)
-&quot;Used to run a restaurant. Now teaching people how to make meals from scraps. Never thought I&#39;d be here but glad I can help. Full recipe list in the comments #BrancaRecipeSwap&quot;
-[if ($choice === &quot;C&quot;)]
-[[.|p4001]]
+[if ($unemployment &gt; $unemploymentCritical || $foodPrices &gt; $inflationCritical ||$refugeeRate &gt; $immigrationCritical || $healthcareLoad &gt; $healthcareCritical)]
+{embed passage: &#39;End&#39;}
 [else]
-[[.|p4000]]
-[continue]
-</tw-passagedata><tw-passagedata pid="76" name="p3034" tags="" position="2000,1200" size="100,100">Message to:
+{embed passage: &#39;Result11&#39;}
+[continue]</tw-passagedata><tw-passagedata pid="76" name="p3034" tags="" position="2000,1200" size="100,100">Message to:
 Marcus : What are our options here? 
 Message from:
 Marcus : Either we take a loan from the Central Banking Authority and we repay it once the projects become profitable
@@ -1577,6 +1580,7 @@ $reformer: $reformer+4
 $corpSupport: $corpSupport-5
 $bankSupport: $bankSupport-3
 $publicSupport: $publicSupport+5
+$foodPrices: $foodPrices - 10
 $decisiveness: $decisiveness+2
 $dayToAdvance: 7
 --
@@ -1602,6 +1606,7 @@ $corpSupport: $corpSupport+6
 $decisiveness: $decisiveness+3
 $publicSupport: $publicSupport-2
 $healthcareLoad: $healthcareLoad-10
+$deathToll: $deathToll - 30
 $dayToAdvance: 10
 --
 Message to:
@@ -1618,6 +1623,7 @@ $bankSupport: $bankSupport-3
 $publicSupport: $publicSupport+1
 $decisiveness: $decisiveness+3
 $healthcareLoad: $healthcareLoad-10
+$deathToll: $deathToll - 30
 $dayToAdvance: 10
 --
 Message to:
@@ -1627,9 +1633,27 @@ Sara : I will start discussing this with Dr. Elena and Dr. Jun immediately.
 
 [[GoodLuck|p3043]]
 
-</tw-passagedata><tw-passagedata pid="85" name="p4000" tags="" position="3675,25" size="100,100">$dayToAdvance: 2
+</tw-passagedata><tw-passagedata pid="85" name="p4000" tags="" position="3975,1025" size="100,100">$oldpriority: $priority
 --
-</tw-passagedata><tw-passagedata pid="86" name="R1AUnemployment" tags="" position="3300,400" size="100,100">National Standard: 
+Message from:
+Sara : Madam President, the plan to tackle the {$priority} crisis has been implemented. 
+Message from:
+Sara : For now, we should let the situation settle and observe the effects to see if they are as intended. Meanwhile, we can start preparing a report on the next issue. 
+Message from:
+Sara : What do you think we should focus on next?
+
+[if ($priority != &quot;unemployment&quot;)]
+[[Unemployment|p4010]] 
+[continue]
+[if ($priority != &quot;healthcare&quot;)]
+[[Healthcare|p4012]]
+[continue]
+[if ($priority != &quot;inflation&quot;)]
+[[Inflation|p4011]]
+[continue]
+[if ($priority != &quot;immigration&quot;)]
+[[Immigration|p4013]]
+[continue]</tw-passagedata><tw-passagedata pid="86" name="R1AUnemployment" tags="" position="3300,400" size="100,100">National Standard: 
 Headline: Government Enacts Corporate Hiring Tax to Protect Brancan Workers
 Article: After {$dayToAdvance} days of internal coordination and regulatory preparation, the administration has enacted a new corporate hiring tax aimed at prioritizing Brancan citizens in the labor market. Under the policy, companies will face increased taxation when hiring non-Brancan residents, making domestic labor comparatively cheaper even at higher wages.
 Officials argue the measure corrects long-standing distortions in the job market that disadvantaged citizens during years of post-war labor inflows. Early government briefings frame the move as a “temporary labor correction” designed to stabilize employment figures without direct state expansion.
@@ -1801,9 +1825,7 @@ The Voice:
 @LinChang_47 (26.2K likes)
 &quot;These are people who fled war and disaster. We&#39;re sending them back to death. Our grandchildren will ask what we did. What will we say? #DeportationWatch&quot;
 @SafeBNC_All6 (22.8K likes)
-&quot;National security requires border control. Every country has the right to control who enters. This is basic sovereignty. #DeportationWatch&quot;</tw-passagedata><tw-passagedata pid="90" name="R1C" tags="" position="3325,150" size="100,100">$publicSupport: $publicSupport-3
---
-[if $mediaKnows]
+&quot;National security requires border control. Every country has the right to control who enters. This is basic sovereignty. #DeportationWatch&quot;</tw-passagedata><tw-passagedata pid="90" name="R1C" tags="" position="3325,150" size="100,100">[if $mediaKnows]
 {embed passage: &#39;R1CKnow&#39;}
 [else]
 {embed passage: &#39;R1CDontKnow&#39;}
@@ -1925,21 +1947,21 @@ The Voice:
 [continue]
 [if ($priority === &quot;inflation&quot;)]
 {embed passage: &#39;R1AInflation&#39;}
+#HealthcareCrisis (221K posts)
+@HealthWatch_BNC (21.3K likes): &quot;Hospitals are still over capacity. ICU beds are filled and staff are exhausted. {$deathToll} people died today. Branca cannot afford another wave. #HealthcareCrisis&quot;
+@SofiaDurand (19.9K likes): &quot;Vaccination delays, ambulance shortages, clinics closing early. People are literally waiting for care. #HealthcareCrisis&quot;
+@MarcusChen47 (18.5K likes): &quot;{$healthcareLoad} % of hospital beds are filled: Something has to change or lives will be lost unnecessarily. #HealthcareCrisis&quot;
+@LucasMoreno47 (17.8K likes): &quot;Waiting times for surgeries are months now. Covid-49 is still killing daily. Branca’s healthcare is at breaking point. #HealthcareCrisis&quot;
+@AnnaVolkova47 (12.2K likes): &quot;Doctors are working double shifts. Hospitals report shortages of basic equipment. This isn’t sustainable. #HealthcareCrisis&quot;
+[continue]
+[if ($priority === &quot;immigration&quot;)]
+{embed passage: &#39;R1AImmigration&#39;}
 #UnemploymentCrisis (221K posts)
 @PatriotFirst_BNC (23.5K likes): &quot;{$unemployment}% unemployed in Branca. This is catastrophic. We need solutions now. #UnemploymentCrisis&quot;
 @VladimirK_Truth (21.1K likes): &quot;People are struggling to find work, we need initiatives immediatley. #UnemploymentCrisis&quot;
 @AlexandraW_47 (19.7K likes): &quot;Families are anxious, youth without prospects. This is the real Branca. #UnemploymentCrisis&quot;
 @PeterMorozov47 (18.3K likes): &quot;Unemployment is the number one threat to recovery. Everyone knows it. #UnemploymentCrisis&quot;
 @LucasMoreno47 (12.9K likes): &quot;{$day} days in and this problem has not even been addressed. #UnemploymentCrisis&quot;
-[continue]
-[if ($priority === &quot;immigration&quot;)]
-{embed passage: &#39;R1AImmigration&#39;}
-#HealthcareCrisis (221K posts)
-@HealthWatch_BNC (21.3K likes): &quot;Hospitals are still over capacity. ICU beds are filled and staff are exhausted. Branca cannot afford another wave. #HealthcareCrisis&quot;
-@SofiaDurand (19.9K likes): &quot;Vaccination delays, ambulance shortages, clinics closing early. People are literally waiting for care. #HealthcareCrisis&quot;
-@MarcusChen47 (18.5K likes): &quot;The numbers don’t lie: Something has to change or lives will be lost unnecessarily. #HealthcareCrisis&quot;
-@LucasMoreno47 (17.8K likes): &quot;Waiting times for surgeries are months now. Covid-49 is still killing daily. Branca’s healthcare is at breaking point. #HealthcareCrisis&quot;
-@AnnaVolkova47 (12.2K likes): &quot;Doctors are working double shifts. Hospitals report shortages of basic equipment. This isn’t sustainable. #HealthcareCrisis&quot;
 [continue]</tw-passagedata><tw-passagedata pid="95" name="R1B" tags="" position="3100,550" size="100,100">[if ($priority === &quot;unemployment&quot;)]
 {embed passage: &#39;R1BUnemployment&#39;}
 [continue]
@@ -2193,6 +2215,636 @@ The Voice:
 @sunline_bnc (21.4K likes)
 &quot;Sara Windsor has experience, not slogans. If anyone can manage integration without chaos, it’s her and she has made it very clear today. #WindsorDoctrine&quot;
 @borderwatcher (18.9K likes)
-&quot;This isn’t just about immigration. It’s about who runs the state: soldiers or administrators, nationalists or liberals. #WindsorDoctrine&quot;</tw-passagedata><tw-passagedata pid="100" name="p4001" tags="" position="3675,200" size="100,100">$dayToAdvance: 2
+&quot;This isn’t just about immigration. It’s about who runs the state: soldiers or administrators, nationalists or liberals. #WindsorDoctrine&quot;</tw-passagedata><tw-passagedata pid="100" name="p4001" tags="" position="3675,200" size="100,100">$dayToAdvance: 14
 --
-</tw-passagedata></tw-storydata></html>
+[if ($priority === &quot;unemployment&quot;)]
+{embed passage: &#39;p4002&#39;}
+[continue]
+[if ($priority === &quot;healthcare&quot;)]
+{embed passage: &#39;p4004&#39;}
+[continue]
+[if ($priority === &quot;inflation&quot;)]
+{embed passage: &#39;p4003&#39;}
+[continue]</tw-passagedata><tw-passagedata pid="101" name="p4002" tags="" position="3700,325" size="100,100">Message from:
+Marcus : Madam President, Dr. Jun and I have studied the labor market.
+Message from:
+Marcus : We have identified that our initial assesment was wrong. Skills mismatch, regional job shortages and corporate hiring patterns have caused the unemployment crisis.
+Message from:
+Marcus : We have a plan to start sector-specific incentives, retraining programs, and regional public-private hiring partnerships.
+
+[[Implement Plan|p4005]]</tw-passagedata><tw-passagedata pid="102" name="p4003" tags="" position="3600,450" size="100,100">$dayToAdvance: 30
+--
+Message from:
+Jun : Madam President. Sara, Marcus and I have completed the supply chain and food pricing analysis.
+Message from:
+Jun : We have identified that our initial assesment was not sustainable in the long run. Price spikes are driven by distribution monopolies, labor shortages in agriculture, and speculative pricing in staple foods.
+Message from:
+Jun : We have a plan to increase and strengthen local agricultural production and reform MegaCorp’s distribution contracts.
+
+[[Implement Plan|p4006]]</tw-passagedata><tw-passagedata pid="103" name="p4005" tags="" position="3850,325" size="100,100">$unemployment: $unemployment -3.5
+$publicSupport: $publicSupport+ 2
+$corpSupport: $corpSupport +1
+--
+Message to:
+Marcus : Good work. Make sure the we are ready to act on this plan immediately.
+Message from:
+Marcus : Thank you. Will do.
+
+[[.|Result2]]</tw-passagedata><tw-passagedata pid="104" name="p4004" tags="" position="3675,600" size="100,100">Message from:
+Sara : Madam President, Dr. Elena and I have the healthcare situation.
+Message from:
+Sara : We have identified that our initial assesment was not sustainable in the long run. Regional infection rates, low hospital capacity and staffing availability in some regions has made the problem worse.
+Message from:
+Sara : We have a plan to implement targeted restrictions in high-risk areas, temporarily expand facilities, recruit additional staff, and setup rapid test-and-trace systems.
+
+[[Implement Plan|p4007]]</tw-passagedata><tw-passagedata pid="105" name="p4006" tags="" position="3850,450" size="100,100">$foodPrices: $foodPrices-15
+$publicSupport: $publicSupport+3
+$corpSupport: $corpSupport-2
+$reformer: $reformer+1
+--
+Message to:
+Jun : Thank you, Jun. Make sure the we are ready to act on this plan immediately.
+Message from:
+Jun : Thank you, Madam President. Will do.
+
+[[.|Result2]]</tw-passagedata><tw-passagedata pid="106" name="p4007" tags="" position="3850,600" size="100,100">$healthcareLoad: $healthcareLoad -18
+$deathToll: $deathToll - 100
+$publicSupport: $publicSupport + 2
+$unemployment: $unemployment + 0.5  
+--
+Message to:
+Sara : Thanks, Sara. Make sure the healthcare facilities and staff are ready to act on this plan immediately.
+Message from:
+Sara : Thank you Liz. Will do.
+Message from:
+Sara : Thank you Madam President*. Sorry about that.
+
+
+[[Its okay|p4008]]
+[[Call me Liz|p4009]]</tw-passagedata><tw-passagedata pid="107" name="p4008" tags="" position="3850,725" size="100,100">$saraLoyality: $saraLoyality-1
+--
+Message to:
+Sara : It&#39;s okay.
+Message from:
+Sara : Talk to you soon. Enjoy the rest of your day.
+[[You too|p4015]]</tw-passagedata><tw-passagedata pid="108" name="p4009" tags="" position="3975,725" size="100,100">$saraLoyality: $saraLoyality+3
+--
+Message to:
+Sara : You can call me Liz
+Message from:
+Sara : Thank you. Enjoy the rest of your day.
+[[You too|p4015]]</tw-passagedata><tw-passagedata pid="109" name="p4010" tags="" position="3975,1150" size="100,100">$priority: &quot;unemployment&quot;
+$dayToAdvance: 14
+--
+{embed passage: &#39;p4014&#39;}</tw-passagedata><tw-passagedata pid="110" name="p4012" tags="" position="3975,1400" size="100,100">$priority: &quot;healthcare&quot;
+$dayToAdvance: 14
+--
+{embed passage: &#39;p4014&#39;}</tw-passagedata><tw-passagedata pid="111" name="p4011" tags="" position="3975,1275" size="100,100">$priority: &quot;inflation&quot;
+$dayToAdvance: 21
+--
+{embed passage: &#39;p4014&#39;}</tw-passagedata><tw-passagedata pid="112" name="p4013" tags="" position="3975,1525" size="100,100">$priority: &quot;immigration&quot;
+$dayToAdvance: 14
+--
+{embed passage: &#39;p4014&#39;}</tw-passagedata><tw-passagedata pid="113" name="p4014" tags="" position="4150,1025" size="100,100">[if $priority === &quot;unemployment&quot;]
+Message to:
+Sara : I think unemployment is getting worse. We should study the labor market to see what is going on.
+Message from:
+Sara : Yes, unemployment is a growing concern. I will ask Marcus and Dr. Jun to make a detailed report and come up with an action plan.
+[continue]
+[if $priority === &quot;inflation&quot;]
+Message to:
+Sara : I think inflation is getting worse. We need a detailed supply chain and food pricing analysis.
+Message from:
+Sara : Yes, inflation is a growing concern. I will work with Dr. Jun and Marcus to make a detailed analysis and come up with an action plan.
+[continue]
+[if $priority === &quot;healthcare&quot;]
+Message to:
+Sara : I think healthcare system is suffering. We should study the healthcare system to see what is going on.
+Message from:
+Sara : Yes, healthcare is a growing concern due to the pandemic. I will work with Dr. Elena to study the system and come up with an action plan.
+[continue]
+[if $priority === &quot;immigration&quot;]
+Message to:
+Sara : I think immigration is getting out of control. We should study the migration trends to see what is going on.
+Message from:
+Sara : They are viewed as a threat. I will ask General Viktor and Dr. Jun to make a detailed report.
+[continue]
+
+[if $saraLoyality &gt; 6]
+Message from:
+Sara : Enjoy your day.
+[[You too|p4015]]
+[else]
+Message from:
+Sara : I hope this works out for Branca&#39;s sake
+[[.|Result2]]
+[continue]</tw-passagedata><tw-passagedata pid="114" name="p4015" tags="" position="4200,725" size="100,100">Message to:
+Sara : You too.
+
+[[.|Result2]]</tw-passagedata><tw-passagedata pid="115" name="R2C" tags="" position="4125,225" size="100,100">[if ($priority === &quot;unemployment&quot;)]
+{embed passage: &#39;R1CUnemployment&#39;}
+#RisingPrices (121K posts)
+@EconomyWatch_BNC (18.1K likes): &quot;Food prices are up {$foodPrices}%, rents keep climbing, and wages barely move. People are struggling. #RisingPrices&quot;
+@ClaraOrtiz92 (16.7K likes): &quot;Basic necessities are out of reach for many families. Inflation is crushing the average Brancan household. #RisingPrices&quot;
+@RajPatel_BNC (14.9K likes): &quot;Everything from bread to electricity is skyrocketing. The numbers don’t lie, Branca’s economy is bleeding citizens. #RisingPrices&quot;
+@GraceKim_Voice (12.4K likes): &quot;Stores report shortages, prices fluctuate daily. Middle-class families are disappearing fast. #RisingPrices&quot;
+@PeterMorozov47 (8.8K likes): &quot;Small business owners are shutting down because costs are uncontrollable. Inflation is the silent crisis Branca can’t ignore. #RisingPrices&quot;
+[continue]
+[if ($priority === &quot;healthcare&quot;)]
+{embed passage: &#39;R1CHealthcare&#39;}
+#UnemploymentCrisis (121K posts)
+@PatriotFirst_BNC (18.5K likes): &quot;{$unemployment}% unemployed in Branca. This is catastrophic. We need solutions now. #UnemploymentCrisis&quot;
+@VladimirK_Truth (17.1K likes): &quot;People are struggling to find work, we need initiatives immediatley. #UnemploymentCrisis&quot;
+@AlexandraW_47 (14.7K likes): &quot;Families are anxious, youth without prospects. This is the real Branca. #UnemploymentCrisis&quot;
+@PeterMorozov47 (12.3K likes): &quot;Unemployment is the number one threat to recovery. Everyone knows it. #UnemploymentCrisis&quot;
+@LucasMoreno47 (9.9K likes): &quot;{$day} days in and this problem has not even been addressed. #UnemploymentCrisis&quot;
+[continue]
+[if ($priority === &quot;inflation&quot;)]
+{embed passage: &#39;R1CInflation&#39;}
+#HealthcareCrisis (121K posts)
+@HealthWatch_BNC (18.3K likes): &quot;Hospitals are still over capacity. ICU beds are filled and staff are exhausted. {$deathToll} people died today. Branca cannot afford another wave. #HealthcareCrisis&quot;
+@SofiaDurand (16.9K likes): &quot;Vaccination delays, ambulance shortages, clinics closing early. People are literally waiting for care. #HealthcareCrisis&quot;
+@MarcusChen47 (14.5K likes): &quot;{$healthcareLoad} % of hospital beds are filled: Something has to change or lives will be lost unnecessarily. #HealthcareCrisis&quot;
+@LucasMoreno47 (13.8K likes): &quot;Waiting times for surgeries are months now. Covid-49 is still killing daily. Branca’s healthcare is at breaking point. #HealthcareCrisis&quot;
+@AnnaVolkova47 (9.2K likes): &quot;Doctors are working double shifts. Hospitals report shortages of basic equipment. This isn’t sustainable. #HealthcareCrisis&quot;
+[continue]</tw-passagedata><tw-passagedata pid="116" name="R1CUnemployment" tags="" position="4300,200" size="100,100">National Standard: 
+Headline: Government Completes Rollout of National Employment Reform Framework
+Article: The government confirmed today that the final phase of its comprehensive employment reform framework has been completed, concluding weeks of sector-specific planning and regional coordination.
+The plan introduces targeted retraining programs, public–private hiring partnerships, and incentive structures aimed at aligning unemployed workers with regional labor shortages. According to officials, implementation has now reached all major economic sectors identified in the initial report.
+While early employment figures remain at {$unemployment}%, the Ministry of Labor stated that measurable effects were not expected immediately, emphasizing that the framework is designed for gradual labor market adjustment rather than short-term intervention.
+Opposition figures remain skeptical, arguing that the delayed approach has already imposed unnecessary social costs.
+
+Public Index: 
+Headline: &quot;Employment Reform Fully Implemented&quot;
+Article: The government has confirmed that the final phase of its long-term employment reform plan is now fully in place. The strategy focuses on sector-specific incentives, retraining programs, and regional public–private hiring partnerships aimed at addressing structural unemployment rather than short-term job creation.
+Officials stress that the plan was never intended to deliver immediate relief, but instead to correct long-standing mismatches between skills, regions, and labor demand. Early indicators suggest increased enrollment in retraining programs, though employment figures have yet to show noticeable change.
+[if $publicIndexSupport &lt; 0]
+Critics argue that the plan arrived too late to matter, calling it disconnected from the urgency faced by unemployed households. Many describe the reforms as “technically sound but socially tone-deaf,” with frustration growing over the absence of immediate job guarantees.
+[continue]
+[if $publicIndexSupport &gt;= 0 &amp;&amp; $publicIndexSupport &lt;= 4]
+Public reaction remains cautious. While some acknowledge the logic of long-term reform, others question whether people struggling today can afford to wait for structural improvements to take effect.
+[continue]
+[if $publicIndexSupport &gt; 4 &amp;&amp; $publicIndexSupport &lt;= 8]
+Supporters describe the plan as a necessary reset, praising the focus on sustainability over political quick fixes. Several regional business groups have welcomed the clearer hiring incentives and coordination mechanisms.
+[continue]
+[if $publicIndexSupport &gt; 8]
+The reforms are being hailed as a rare example of disciplined governance, with many calling the approach “measured” and “serious.” Public confidence appears buoyed by the government’s refusal to rush into costly emergency measures.
+[continue]
+Expectations are now firmly set on results. Whether patience will hold depends on how quickly the promised structural changes translate into real jobs.
+
+The Voice:
+#BackToTraining (254K posts)
+@samir_n (26.3K likes)
+&quot;First day of retraining today. Haven’t been in a class in years. Scary, but better than staring at job boards. #BackToTraining&quot;
+@lena.p (21.7K likes)
+&quot;Signed up for logistics training through the regional partnership program. If this leads to a job, I’m in. #BackToTraining&quot;
+@tom_r (17.9K likes)
+&quot;Didn’t expect the government to actually coordinate with local employers. That part surprised me. #BackToTraining&quot;
+@irene_k (13.4K likes)
+&quot;Course is intense, but they’re teaching skills companies actually asked for. That’s new. #BackToTraining&quot;
+
+#NotHiredYet (239K posts)
+@markus_b (24.8K likes)
+&quot;Retraining will not work. Having a certificate in hand does not mean a job offer. Hope this isn’t where the story ends. #NotHiredYet&quot;
+@sofia_m (19.2K likes)
+&quot;Partnerships sound great until you realize there are still more trainees than openings. #NotHiredYet&quot;
+@david.l (15.6K likes)
+&quot;I’m glad something exists now. But the pressure’s on to prove this wasn’t just well-designed paperwork. #NotHiredYet&quot;
+@elin_s (12.1K likes)
+&quot;Stabilization ≠ security. Ask me again when I’m actually employed. #NotHiredYet&quot;</tw-passagedata><tw-passagedata pid="117" name="R1CHealthcare" tags="" position="4175,425" size="100,100">National Standard: 
+Headline: Targeted Health Measures Fully Implemented as Government Shifts to Monitoring Phase
+Article: The Ministry of Health confirmed today that the final components of its targeted pandemic response strategy have been fully implemented, including regional restrictions, temporary facility expansion, and nationwide test-and-trace operations.
+Officials reported that additional staff recruitment and temporary healthcare capacity are now operational across all high-risk regions identified in the initial assessment. The government stated that the system is designed to adapt dynamically as infection patterns evolve.
+While healthcare facilities remain under pressure, authorities indicated that utilization rates have stabilized compared to projections made prior to the reforms. No immediate policy changes are planned as officials begin a data collection and evaluation phase.
+Opposition leaders welcomed increased system capacity but questioned whether earlier intervention could have reduced overall losses. 
+
+Public Index: 
+Headline: &quot;Healthcare Expansion &amp; Targeted Measures Fully Implemented&quot;
+Article: The government has completed the final stage of its healthcare reform plan, which included targeted restrictions in high-risk areas, temporary facility expansions, rapid staff recruitment, and the rollout of a test-and-trace system.
+Early reports show hospital capacities stabilizing in critical regions, and additional staff have begun relieving overburdened facilities. Authorities emphasize that results are expected to improve steadily as the new system integrates fully.
+[if $publicIndexSupport &lt; 0]
+Critics claim that the reforms feel slow to impact daily life. Some argue that waiting for systemic improvements does little for patients currently facing delays or lack of care.
+[continue]
+[if $publicIndexSupport &gt;= 0 &amp;&amp; $publicIndexSupport &lt;= 4]
+Public sentiment is cautiously optimistic. Many recognize the effort to prevent future crises but remain concerned about immediate care availability and ongoing risks in crowded hospitals.
+[continue]
+[if $publicIndexSupport &gt; 4 &amp;&amp; $publicIndexSupport &lt;= 8]
+Supporters highlight the proactive approach, praising the combination of expanded capacity and targeted interventions as a measured way to protect communities without total lockdowns.
+[continue]
+[if $publicIndexSupport &gt; 8]
+The plan is being widely lauded as a comprehensive strategy that balances patient care, healthcare staff wellbeing, and long-term epidemic preparedness. Confidence is high that the system can handle future surges more efficiently.
+[continue]
+Officials urge patience as the reforms fully integrate, noting that improvements in healthcare outcomes will appear gradually, but stress that the current measures mark a turning point in the response to ongoing health challenges.
+
+The Voice:
+#TargetedRules (214K posts)
+@linus.p (26.7K likes)
+&quot;Restrictions finally make sense. My area’s open, high-risk zones tightened. About time policy matched reality. #TargetedRules&quot;
+@hannah_w (21.3K likes)
+&quot;Test results in under 24 hours and actual follow-ups. Didn’t think we’d get here. #TargetedRules&quot;
+@marko_d (17.6K likes)
+&quot;Still careful, still masked, but it feels less chaotic now. Clear rules help. #TargetedRules&quot;
+@irene_k (14.9K likes)
+&quot;Temporary clinics near us reduced hospital wait times a lot. Staff look exhausted but supported. #TargetedRules&quot;
+
+#TooLateForSome (189K posts)
+@victor_s (28.4K likes)
+&quot;Glad things are stabilizing. Wish this system existed before my father ended up on a waiting list. #TooLateForSome&quot;
+@sarah_m (20.8K likes)
+&quot;Targeted response works, but the delay cost lives. We shouldn’t forget that. #TooLateForSome&quot;
+@daniel_h (16.1K likes)
+&quot;Test-and-trace is good policy. Hard to celebrate when losses are already locked in. #TooLateForSome&quot;
+@amina_r (13.4K likes)
+&quot;This feels like damage control done right, just later than it should’ve been. #TooLateForSome&quot;</tw-passagedata><tw-passagedata pid="118" name="R1CInflation" tags="" position="4300,325" size="100,100">National Standard: 
+Headline: Agricultural and Supply Chain Reforms Enter Final Implementation Phase
+Article: The administration announced today that the final stage of its food price stabilization strategy has been completed, marking the conclusion of reforms targeting domestic agriculture and national food distribution.
+The plan focuses on strengthening local production capacity, revising distribution contracts, and reducing long-term dependency on centralized intermediaries. Officials confirmed that new contractual frameworks governing food logistics are now in effect nationwide.
+Authorities cautioned that consumer prices may take time to respond, noting that supply-side reforms typically lag behind policy implementation. Short-term volatility, they said, was anticipated during the transition period. Critics argue that households continue to bear the burden of high prices
+
+Public Index: 
+Headline: &quot;Inflation Reform Plan Fully Implemented, Public Watches Closely&quot;
+Article: The government has announced the completion of the final stage of its inflation reform strategy, centered on strengthening local agricultural production and restructuring MegaCorp’s food distribution contracts. The plan aims to reduce long-term price volatility by addressing supply-side weaknesses rather than imposing direct market controls.
+Officials emphasize that the reforms are designed to take effect gradually, improving food availability and reducing dependency on centralized distributors. Early reports indicate increased domestic production commitments, though consumer prices have yet to show meaningful decline.
+[if $publicIndexSupport &lt; 0]
+Critics argue the reforms feel abstract to households facing rising grocery bills today. Many describe the plan as favoring future stability over present affordability, with skepticism growing about whether structural fixes can deliver timely relief.
+[continue]
+[if $publicIndexSupport &gt;= 0 &amp;&amp; $publicIndexSupport &lt;= 4]
+Public response remains mixed. Some welcome the focus on domestic production, while others express concern that the lack of immediate price intervention leaves families exposed in the short term.
+[continue]
+[if $publicIndexSupport &gt; 4 &amp;&amp; $publicIndexSupport &lt;= 8]
+Supporters frame the reforms as a long-overdue correction to distorted supply chains. Agricultural groups and regional producers have voiced cautious optimism about fairer contracts and improved market access.
+[continue]
+[if $publicIndexSupport &gt; 8]
+The strategy is being widely praised as a disciplined break from reactive price controls. Many view the reforms as laying the groundwork for lasting price stability without undermining market confidence.
+[continue]
+While patience is being urged by officials, public sentiment will ultimately hinge on whether structural changes translate into lower prices at the checkout counter.
+
+The Voice:
+#LocalFirst (261K posts)
+@noah_v (23.9K likes)
+&quot;Bought vegetables today that were actually grown in my region. First time in years. Prices still a little high, but it feels… different. #LocalFirst&quot;
+@marie.h (20.4K likes)
+&quot;New supplier at the market says the distribution contract finally lets small farms sell directly. Took long enough. #LocalFirst&quot;
+@oskar_r (16.8K likes)
+&quot;Not cheap yet, but shelves are fuller and less random. That alone helps planning meals. #LocalFirst&quot;
+@ana_k (13.7K likes)
+&quot;Local produce labels everywhere now. Hope this sticks once the crisis fades. #LocalFirst&quot;
+
+#StillExpensive (196K posts)
+@paul_m (25.1K likes)
+&quot;Reform or not, my grocery bill is still brutal. Maybe this helps long-term, but today still hurts. #StillExpensive&quot;
+@elinor_s (18.9K likes)
+&quot;Distribution reform sounds good until you realize it doesn’t magically lower prices overnight. #StillExpensive&quot;
+@jonas_l (15.2K likes)
+&quot;I support breaking MegaCorp’s grip. Just wish relief came faster for normal households. #StillExpensive&quot;
+@fatima_b (12.6K likes)
+&quot;More choice, better supply. Prices? Barely moved. Mixed feelings. #StillExpensive&quot;</tw-passagedata><tw-passagedata pid="119" name="R2" tags="" position="4500,0" size="100,100">National Standard: 
+Headline: Reconstruction-Era Housing Complex in Eastern District Shows Structural Failures After Just Six Years
+Article: Engineers have identified critical structural issues in the Riverside Heights residential complex, one of the flagship reconstruction projects completed in 2043. The 800-unit development is now showing foundation cracks, water damage, and electrical system failures that residents say have worsened over the past year.
+&quot;We were told these buildings would last decades,&quot; said Maria Konstantinov, a resident who moved in when the complex opened. &quot;Six years later, we have water leaking through ceilings, power outages every week, and cracks in the walls wide enough to put your hand through.&quot;
+&quot;Reconstruction presented unique challenges,&quot; explained structural engineer David Torres. &quot;The pressure to build quickly, material shortages, inexperienced labor pools - all of these factors created perfect conditions for long-term problems.&quot;
+The Ministry of Housing has acknowledged the issues and pledged inspections of similar reconstruction-era buildings across Branca. However, with limited government resources already stretched by current economic challenges, the timeline and funding for repairs remain unclear.
+
+The Voice: 
+#ReconstructionFailing (156K posts)
+@maria_konstantin (24.3K likes)
+&quot;Been living in Riverside Heights since 2043. Cracks in my bedroom wall now. Water damage in kitchen. Electric cuts out weekly. They said these buildings would last. Six years. SIX YEARS. #ReconstructionFailing&quot;
+@david_torres_engineer (19.7K likes)
+&quot;As a structural engineer, I warned about this in 2042. You can&#39;t rush construction and expect it to last. But nobody wanted to hear it during reconstruction. Now we&#39;re paying the price. #ReconstructionFailing&quot;
+@john_westside (16.2K likes)
+&quot;My cousin lives in Riverside Heights. Showed me photos of the damage. This is criminal. MegaCorp got paid millions for buildings that are falling apart after 6 years. Where&#39;s the accountability? #ReconstructionFailing&quot;
+@sara_mom_of_3 (13.8K likes)
+&quot;We can&#39;t afford to move. Nowhere else to go. So we just... live with leaking ceilings and cracked walls and pray nothing collapses. This is Branca 2049. #ReconstructionFailing&quot;
+
+[if ($oldpriority === &quot;unemployment&quot;)]
+#HealthcareCrisis (133K posts)
+@HealthWatch_BNC (18.3K likes): &quot;Hospitals are still over capacity. ICU beds are filled and staff are exhausted. {$deathToll} people died today. Branca cannot afford another wave. #HealthcareCrisis&quot;
+@SofiaDurand (16.9K likes): &quot;Vaccination delays, ambulance shortages, clinics closing early. People are literally waiting for care. #HealthcareCrisis&quot;
+@MarcusChen47 (14.5K likes): &quot;{$healthcareLoad} % of hospital beds are filled: Something has to change or lives will be lost unnecessarily. #HealthcareCrisis&quot;
+@LucasMoreno47 (13.8K likes): &quot;Waiting times for surgeries are months now. Covid-49 is still killing daily. Branca’s healthcare is at breaking point. #HealthcareCrisis&quot;
+@AnnaVolkova47 (9.2K likes): &quot;Doctors are working double shifts. Hospitals report shortages of basic equipment. This isn’t sustainable. #HealthcareCrisis&quot;
+
+#RisingPrices (121K posts)
+@EconomyWatch_BNC (18.1K likes): &quot;Food prices are up {$foodPrices}%, rents keep climbing, and wages barely move. People are struggling. #RisingPrices&quot;
+@ClaraOrtiz92 (16.7K likes): &quot;Basic necessities are out of reach for many families. Inflation is crushing the average Brancan household. #RisingPrices&quot;
+@RajPatel_BNC (14.9K likes): &quot;Everything from bread to electricity is skyrocketing. The numbers don’t lie, Branca’s economy is bleeding citizens. #RisingPrices&quot;
+@GraceKim_Voice (12.4K likes): &quot;Stores report shortages, prices fluctuate daily. Middle-class families are disappearing fast. #RisingPrices&quot;
+@PeterMorozov47 (8.8K likes): &quot;Small business owners are shutting down because costs are uncontrollable. Inflation is the silent crisis Branca can’t ignore. #RisingPrices&quot;
+[continue]
+[if ($oldpriority === &quot;healthcare&quot;)]
+#UnemploymentCrisis (139K posts)
+@PatriotFirst_BNC (18.5K likes): &quot;{$unemployment}% unemployed in Branca. This is catastrophic. We need solutions now. #UnemploymentCrisis&quot;
+@VladimirK_Truth (17.1K likes): &quot;People are struggling to find work, we need initiatives immediatley. #UnemploymentCrisis&quot;
+@AlexandraW_47 (14.7K likes): &quot;Families are anxious, youth without prospects. This is the real Branca. #UnemploymentCrisis&quot;
+@PeterMorozov47 (12.3K likes): &quot;Unemployment is the number one threat to recovery. Everyone knows it. #UnemploymentCrisis&quot;
+@LucasMoreno47 (9.9K likes): &quot;{$day} days in and this problem has not even been addressed. #UnemploymentCrisis&quot;
+
+#RisingPrices (121K posts)
+@EconomyWatch_BNC (18.1K likes): &quot;Food prices are up {$foodPrices}%, rents keep climbing, and wages barely move. People are struggling. #RisingPrices&quot;
+@ClaraOrtiz92 (16.7K likes): &quot;Basic necessities are out of reach for many families. Inflation is crushing the average Brancan household. #RisingPrices&quot;
+@RajPatel_BNC (14.9K likes): &quot;Everything from bread to electricity is skyrocketing. The numbers don’t lie, Branca’s economy is bleeding citizens. #RisingPrices&quot;
+@GraceKim_Voice (12.4K likes): &quot;Stores report shortages, prices fluctuate daily. Middle-class families are disappearing fast. #RisingPrices&quot;
+@PeterMorozov47 (8.8K likes): &quot;Small business owners are shutting down because costs are uncontrollable. Inflation is the silent crisis Branca can’t ignore. #RisingPrices&quot;
+[continue]
+[if ($oldpriority === &quot;inflation&quot;)]
+#HealthcareCrisis (139K posts)
+@HealthWatch_BNC (18.3K likes): &quot;Hospitals are still over capacity. ICU beds are filled and staff are exhausted. {$deathToll} people died today. Branca cannot afford another wave. #HealthcareCrisis&quot;
+@SofiaDurand (16.9K likes): &quot;Vaccination delays, ambulance shortages, clinics closing early. People are literally waiting for care. #HealthcareCrisis&quot;
+@MarcusChen47 (14.5K likes): &quot;{$healthcareLoad} % of hospital beds are filled: Something has to change or lives will be lost unnecessarily. #HealthcareCrisis&quot;
+@LucasMoreno47 (13.8K likes): &quot;Waiting times for surgeries are months now. Covid-49 is still killing daily. Branca’s healthcare is at breaking point. #HealthcareCrisis&quot;
+@AnnaVolkova47 (9.2K likes): &quot;Doctors are working double shifts. Hospitals report shortages of basic equipment. This isn’t sustainable. #HealthcareCrisis&quot;
+
+#Unemployed (121K posts)
+@PatriotFirst_BNC (18.5K likes): &quot;{$unemployment}% unemployed in Branca. This is catastrophic. We need solutions now. #Unemployed&quot;
+@VladimirK_Truth (17.1K likes): &quot;People are struggling to find work, we need initiatives immediatley. #Unemployed&quot;
+@AlexandraW_47 (14.7K likes): &quot;Families are anxious, youth without prospects. This is the real Branca. #Unemployed&quot;
+@PeterMorozov47 (12.3K likes): &quot;Unemployment is the number one threat to recovery. Everyone knows it. #Unemployed&quot;
+@LucasMoreno47 (9.9K likes): &quot;{$day} days in and this problem has not even been addressed. #Unemployed&quot;
+[continue]
+[if ($oldpriority === &quot;immigration&quot;)]
+#HealthcareCrisis (139K posts)
+@HealthWatch_BNC (18.3K likes): &quot;Hospitals are still over capacity. ICU beds are filled and staff are exhausted. {$deathToll} people died today. Branca cannot afford another wave. #HealthcareCrisis&quot;
+@SofiaDurand (16.9K likes): &quot;Vaccination delays, ambulance shortages, clinics closing early. People are literally waiting for care. #HealthcareCrisis&quot;
+@MarcusChen47 (14.5K likes): &quot;{$healthcareLoad} % of hospital beds are filled: Something has to change or lives will be lost unnecessarily. #HealthcareCrisis&quot;
+@LucasMoreno47 (13.8K likes): &quot;Waiting times for surgeries are months now. Covid-49 is still killing daily. Branca’s healthcare is at breaking point. #HealthcareCrisis&quot;
+@AnnaVolkova47 (9.2K likes): &quot;Doctors are working double shifts. Hospitals report shortages of basic equipment. This isn’t sustainable. #HealthcareCrisis&quot;
+
+#RisingPrices (121K posts)
+@EconomyWatch_BNC (18.1K likes): &quot;Food prices are up {$foodPrices}%, rents keep climbing, and wages barely move. People are struggling. #RisingPrices&quot;
+@ClaraOrtiz92 (16.7K likes): &quot;Basic necessities are out of reach for many families. Inflation is crushing the average Brancan household. #RisingPrices&quot;
+@RajPatel_BNC (14.9K likes): &quot;Everything from bread to electricity is skyrocketing. The numbers don’t lie, Branca’s economy is bleeding citizens. #RisingPrices&quot;
+@GraceKim_Voice (12.4K likes): &quot;Stores report shortages, prices fluctuate daily. Middle-class families are disappearing fast. #RisingPrices&quot;
+@PeterMorozov47 (8.8K likes): &quot;Small business owners are shutting down because costs are uncontrollable. Inflation is the silent crisis Branca can’t ignore. #RisingPrices&quot;
+[continue]</tw-passagedata><tw-passagedata pid="120" name="End" tags="" position="4900,750" size="100,100"></tw-passagedata><tw-passagedata pid="121" name="Result22" tags="" position="4375,0" size="100,100">$day: $day+$dayToAdvance
+$publicIndexSupport: (($adSpend*40)+($publicSupport*2)+(($corpSupport+$bankSupport)*2))/10
+--
+[if ($choice === &quot;C&quot;)]
+{embed passage: &#39;R2C&#39;}
+[else]
+{embed passage: &#39;R2&#39;}
+[continue]
+#HomeWorkoutChallenge (116K posts)
+@alex_moreno92 (22.8K likes)
+&quot;Day 14 of working out in my living room. No gym, no equipment, just a chair and bad motivation. Posting routines so we keep each other moving. #HomeWorkoutChallenge&quot;
+@linnea.j (19.4K likes)
+&quot;Never thought I’d miss treadmills this much. Sharing my 20-minute apartment cardio routine for anyone stuck indoors. #HomeWorkoutChallenge&quot;
+@omar_fitlife (16.9K likes)
+&quot;Lost my job, gained time. Trying to stay sane by staying active. Push-ups, squats, repeat. Join me. #HomeWorkoutChallenge&quot;
+@katya_worksfromhome (13.6K likes)
+&quot;My downstairs neighbors hate me but my back pain is gone. Worth it. Daily stretch routine in thread. #HomeWorkoutChallenge&quot;
+@jonas_bergstrom (11.9K likes)
+&quot;Started this as a joke. Now 300 people are following along. Turns out moving a bit helps mentally too. #HomeWorkoutChallenge&quot;
+
+#BrancaWindowMusic (93K posts)
+@sofia_rinaldi (21.7K likes)
+&quot;Someone on my street played the violin from their window tonight. Whole block stopped to listen. We needed that. #BrancaWindowMusic&quot;
+@marko_p (18.2K likes)
+&quot;8pm every night someone new plays music from their balcony. Guitar, piano, even a trumpet once. Small joy, big impact. #BrancaWindowMusic&quot;
+@elena.kovacs (15.5K likes)
+&quot;I don’t know my neighbors’ names but I know their music taste now. Feels less lonely somehow. #BrancaWindowMusic&quot;
+@thomas_writes (12.8K likes)
+&quot;Kids across the street sang instead of played instruments. Completely off-key. Still beautiful. #BrancaWindowMusic&quot;
+@rhea_97 (10.6K likes)
+&quot;Recorded tonight’s window concert and cried after. Didn’t expect that. Sharing the clip here. #BrancaWindowMusic&quot;
+
+[[.|p5000]]</tw-passagedata><tw-passagedata pid="122" name="Result2" tags="" position="4175,0" size="100,100">[JavaScript]
+var pdays = engine.state.get(&quot;$dayToAdvance&quot;)
+var priority = engine.state.get(&quot;$priority&quot;)
+var oldpriority = engine.state.get(&quot;$oldpriority&quot;)
+var choice = engine.state.get(&quot;$choice&quot;)
+var unemployment = engine.state.get(&quot;$unemployment&quot;)
+var foodPrices = engine.state.get(&quot;$foodPrices&quot;)
+var refugeeRate = engine.state.get(&quot;$refugeeRate&quot;)
+var healthcareLoad = engine.state.get(&quot;$healthcareLoad&quot;)
+var deathToll = engine.state.get(&quot;$deathToll&quot;)
+if(choice == &quot;C&quot;)
+{
+    if(pdays == 14)
+	{
+    	if(priority == &quot;unemployment&quot;)
+		{
+        	engine.state.set(&quot;$unemployment&quot;, unemployment+1)
+			engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+			engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8)
+			engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+			engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+		}
+        else if(priority == &quot;healthcare&quot;)
+		{
+        	engine.state.set(&quot;$unemployment&quot;, unemployment+1.4)
+			engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+			engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8
+			engine.state.set(&quot;$deathToll&quot;, deathToll+10)
+		}
+	}
+    else if(pdays == 30)
+	{
+		engine.state.set(&quot;$unemployment&quot;, unemployment+3)
+       	engine.state.set(&quot;$foodPrices&quot;, foodPrices+0.8)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1.7)
+		engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+10)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+62)
+	}
+}
+else
+{
+	if(pdays == 14)
+	{
+    	if(oldpriority == &quot;unemployment&quot;)
+		{
+        	if(choice == &quot;A&quot;)
+			{
+            	engine.state.set(&quot;$unemployment&quot;, unemployment-0.8)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.5)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+            }
+            else
+            {
+				engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+             }
+		}
+        else if(oldpriority == &quot;healthcare&quot;)
+		{
+        	if(choice == &quot;A&quot;)
+			{
+            	engine.state.set(&quot;$unemployment&quot;, unemployment+1.6)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.4)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+1)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+8)
+            }
+            else
+            {
+				engine.state.set(&quot;$unemployment&quot;, unemployment+1.4)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+15)
+             }
+		}
+        else if(oldpriority == &quot;immigration&quot;)
+		{
+        	if(choice == &quot;A&quot;)
+			{
+            	engine.state.set(&quot;$unemployment&quot;, unemployment-1)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.7)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate-1.5)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+3)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+25)
+            }
+            else
+            {
+				engine.state.set(&quot;$unemployment&quot;, unemployment+1.5)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.2)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+3)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+             }
+		}
+	}
+    else if(pdays == 21)
+	{
+		if(choice == &quot;A&quot;)
+			{
+            	engine.state.set(&quot;$unemployment&quot;, unemployment+2.3)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1.2)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+7)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+42)
+            }
+            else
+            {
+            	engine.state.set(&quot;$unemployment&quot;, unemployment+2.1)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1.2)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+7)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+42)
+             }
+	}
+}
+[continue]
+
+[if ($unemployment &gt; $unemploymentCritical || $foodPrices &gt; $inflationCritical ||$refugeeRate &gt; $immigrationCritical || $healthcareLoad &gt; $healthcareCritical)]
+{embed passage: &#39;End&#39;}
+[else]
+{embed passage: &#39;Result22&#39;}
+[continue]</tw-passagedata><tw-passagedata pid="123" name="Result11" tags="" position="3500,0" size="100,100">$day: $day+$dayToAdvance
+$publicIndexSupport: (($adSpend*40)+($publicSupport*2)+(($corpSupport+$bankSupport)*2))/10
+--
+[JavaScript]
+var pdays = engine.state.get(&quot;$dayToAdvance&quot;)
+var priority = engine.state.get(&quot;$priority&quot;)
+var choice = engine.state.get(&quot;$choice&quot;)
+var unemployment = engine.state.get(&quot;$unemployment&quot;)
+var foodPrices = engine.state.get(&quot;$foodPrices&quot;)
+var refugeeRate = engine.state.get(&quot;$refugeeRate&quot;)
+var healthcareLoad = engine.state.get(&quot;$healthcareLoad&quot;)
+var deathToll = engine.state.get(&quot;$deathToll&quot;)
+if(choice == &quot;C&quot;)
+{
+    if(pdays == 14)
+	{
+    	engine.state.set(&quot;$unemployment&quot;, unemployment+1.4)
+		engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8)
+		engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+	}
+    else if(pdays == 21)
+	{
+		engine.state.set(&quot;$unemployment&quot;, unemployment+2.1)
+		engine.state.set(&quot;$foodPrices&quot;, foodPrices + 2.1)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1.2)
+		engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+7)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+42)
+	}
+}
+else
+{
+	if(pdays == 3)
+	{
+		engine.state.set(&quot;$unemployment&quot;, unemployment+0.3)
+		engine.state.set(&quot;$foodPrices&quot;, foodPrices+0.3)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.1)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+5)
+	}
+	if(pdays == 7)
+	{
+    	if(priority == &quot;unemployment&quot;)
+		{
+			engine.state.set(&quot;$foodPrices&quot;, foodPrices+0.7)
+			engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.3)
+		}
+        else if(priority == &quot;inflation&quot;)
+		{
+        	engine.state.set(&quot;$unemployment&quot;, unemployment+0.7)
+			engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.3)
+		}
+        else if(priority == &quot;immigration&quot;)
+		{
+        	engine.state.set(&quot;$unemployment&quot;, unemployment+0.7)
+			engine.state.set(&quot;$foodPrices&quot;, foodPrices+0.3)
+            if(choice == &quot;B&quot;)
+			{
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.3)
+            }
+		}
+		engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+	}
+	else if(pdays == 10)
+	{
+		engine.state.set(&quot;$unemployment&quot;, unemployment+0.9)
+		engine.state.set(&quot;$foodPrices&quot;, foodPrices+1)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.5)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+8)
+	}
+}
+[continue]
+[if ($choice === &quot;C&quot;)]
+{embed passage: &#39;R1C&#39;}
+[else]
+{embed passage: &#39;R1&#39;}
+[continue]
+#Covid49Memorial (214K posts)
+@HealthcareWorker_BNC (28.9K likes)
+&quot;We lost 8 colleagues this month. EIGHT. All healthcare workers trying to save others. The system is breaking and we&#39;re breaking with it. #Covid49Memorial&quot;
+@GrievingDaughter (22.4K likes)
+&quot;Mom died yesterday. Day {$day} of the new government. She waited for things to get better. They didn&#39;t. She&#39;s gone. I don&#39;t know what to feel anymore. #Covid49Memorial&quot;
+@CommunityStrong_BNC (19.8K likes)
+&quot;Virtual memorial service tonight at 8pm for everyone we lost to Covid-49 this month. Light a candle. Say their names. They mattered. #Covid49Memorial&quot;
+@StatisticsDaily (16.7K likes)
+&quot;Covid-49 deaths this month: 6,000+. That&#39;s more than 6,000 people with families, dreams, futures. Not just numbers. Remember them. #Covid49Memorial&quot;
+@YoungSurvivor_23 (13.9K likes)
+&quot;I survived Covid-49 but my lungs will never be the same. I was young and healthy. This virus doesn&#39;t care. Wear your masks. Please. #Covid49Memorial&quot;
+
+#BrancaRecipeSwap (189K posts)
+@BudgetCookingMom (24.6K likes)
+&quot;Since we&#39;re all broke: Rice + canned beans + whatever spices you have = filling meal for under $2. Been living on this for weeks. Add recipes below#BrancaRecipeSwap&quot;
+@MaKnowsBest_BNC (20.1K likes)
+&quot;War-era recipe from my mother: potato soup that feeds 6 for $3. We survived then, we&#39;ll survive now. Recipe thread: #BrancaRecipeSwap&quot;
+@CommunityKitchen_BNC (17.8K likes)
+&quot;Our community kitchen served 450 people yesterday. We share recipes, ingredients, hope. This is how we survive together. Join us. #BrancaRecipeSwap&quot;
+@TeenageSurvivor (14.3K likes)
+&quot;I&#39;m 16. I shouldn&#39;t have to know this many ways to make rice stretch for a week. But here we are. At least we&#39;re helping each other. #BrancaRecipeSwap&quot;
+@FormerChef_BNC (11.7K likes)
+&quot;Used to run a restaurant. Now teaching people how to make meals from scraps. Never thought I&#39;d be here but glad I can help. Full recipe list in the comments #BrancaRecipeSwap&quot;
+[if ($choice === &quot;C&quot;)]
+[[.|p4001]]
+[else]
+[[.|p4000]]
+[continue]
+</tw-passagedata><tw-passagedata pid="124" name="p5000" tags="" position="4650,200" size="100,100">[JavaScript]
+var priority = engine.state.get(&quot;$priority&quot;)
+var oldpriority = engine.state.get(&quot;$oldpriority&quot;)
+var choice = engine.state.get(&quot;$choice&quot;)
+if(choice == &quot;C&quot;)
+{
+	engine.state.set(&quot;$oldpriority&quot;, priority)
+	engine.state.set(&quot;$priority&quot;, &quot;none&quot;)
+}
+[continue]
+</tw-passagedata><tw-passagedata pid="125" name="Untitled Passage" tags="" position="4650,325" size="100,100"></tw-passagedata></tw-storydata></html>
