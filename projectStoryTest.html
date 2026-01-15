@@ -258,6 +258,7 @@ $unemploymentCritical: 30
 $inflationCritical: 50
 $healthcareCritical: 98
 $immigrationCritical: 10
+$pass: 0
 --
 National Standard: 
 Headline: New President Faces Unprecedented Crisis - Can Inexperienced Leadership Handle It?
@@ -1401,10 +1402,14 @@ Viktor : That is our only option. Let us do it then.
 Message from:
 Viktor : Okay. I will get the immigration department working on it.
 
+[if ($pass === 0)]
 [[.|p3044]]
+[else]
+[[.|p500F]]
+[continue]
 [[Inform Sara|p3032]]
 
-</tw-passagedata><tw-passagedata pid="72" name="3031" tags="" position="3150,1075" size="100,100">$choice: &quot;B&quot;
+</tw-passagedata><tw-passagedata pid="72" name="3031" tags="" position="3175,1075" size="100,100">$choice: &quot;B&quot;
 $reformer: $reformer+5
 $corpSupport: $corpSupport+2
 $decisiveness: $decisiveness+5
@@ -1418,17 +1423,26 @@ Sara : That is our only option. Let us do it then.
 Message from:
 Sara : Okay. I will get the immigration department working on it.
 
+
+[if ($pass === 0)]
 [[.|p3044]]
+[else]
+[[.|p500F]]
+[continue]
 [[Inform Viktor|p3033]]
 
-</tw-passagedata><tw-passagedata pid="73" name="p3032" tags="" position="3000,1250" size="100,100">$saraLoyality: $saraLoyality+2
+</tw-passagedata><tw-passagedata pid="73" name="p3032" tags="" position="2975,1250" size="100,100">$saraLoyality: $saraLoyality+2
 --
 Message to:
 Sara : Sorry Sara, I can not see your plan working the way you hope it will.
 Message from:
 Sara : I can not say that I am not disappointed but I understand.
 
-[[.|p3044]]</tw-passagedata><tw-passagedata pid="74" name="p3033" tags="" position="3175,1250" size="100,100">$viktorPower: $viktorPower-1
+[if ($pass === 0)]
+[[.|p3044]]
+[else]
+[[.|p500F]]
+[continue]</tw-passagedata><tw-passagedata pid="74" name="p3033" tags="" position="3175,1250" size="100,100">$viktorPower: $viktorPower-1
 --
 Message to:
 Viktor : Sorry General, I can not see your plan working the way you hope it will.
@@ -1436,7 +1450,11 @@ Message to:
 Viktor : I am letting Sara incharge of the department.
 Message from:
 Viktor : I can not say that I am not disappointed.
-[[.|p3044]]</tw-passagedata><tw-passagedata pid="75" name="Result1" tags="" position="3275,25" size="100,100">[JavaScript]
+[if ($pass === 0)]
+[[.|p3044]]
+[else]
+[[.|p500F]]
+[continue]</tw-passagedata><tw-passagedata pid="75" name="Result1" tags="" position="3275,25" size="100,100">[JavaScript]
 var pdays = engine.state.get(&quot;$dayToAdvance&quot;)
 var priority = engine.state.get(&quot;$priority&quot;)
 var choice = engine.state.get(&quot;$choice&quot;)
@@ -1642,16 +1660,16 @@ Sara : For now, we should let the situation settle and observe the effects to se
 Message from:
 Sara : What do you think we should focus on next?
 
-[if ($priority != &quot;unemployment&quot;)]
+[if ($oldpriority != &quot;unemployment&quot;)]
 [[Unemployment|p4010]] 
 [continue]
-[if ($priority != &quot;healthcare&quot;)]
+[if ($oldpriority != &quot;healthcare&quot;)]
 [[Healthcare|p4012]]
 [continue]
-[if ($priority != &quot;inflation&quot;)]
+[if ($oldpriority != &quot;inflation&quot;)]
 [[Inflation|p4011]]
 [continue]
-[if ($priority != &quot;immigration&quot;)]
+[if ($oldpriority != &quot;immigration&quot;)]
 [[Immigration|p4013]]
 [continue]</tw-passagedata><tw-passagedata pid="86" name="R1AUnemployment" tags="" position="3300,400" size="100,100">National Standard: 
 Headline: Government Enacts Corporate Hiring Tax to Protect Brancan Workers
@@ -2250,7 +2268,12 @@ Marcus : Good work. Make sure the we are ready to act on this plan immediately.
 Message from:
 Marcus : Thank you. Will do.
 
-[[.|Result2]]</tw-passagedata><tw-passagedata pid="104" name="p4004" tags="" position="3675,600" size="100,100">Message from:
+[if ($pass === 0)]
+[[.|Result2]]
+[else]
+[[.|p500F]]
+[continue]
+</tw-passagedata><tw-passagedata pid="104" name="p4004" tags="" position="3675,600" size="100,100">Message from:
 Sara : Madam President, Dr. Elena and I have the healthcare situation.
 Message from:
 Sara : We have identified that our initial assesment was not sustainable in the long run. Regional infection rates, low hospital capacity and staffing availability in some regions has made the problem worse.
@@ -2267,7 +2290,11 @@ Jun : Thank you, Jun. Make sure the we are ready to act on this plan immediately
 Message from:
 Jun : Thank you, Madam President. Will do.
 
-[[.|Result2]]</tw-passagedata><tw-passagedata pid="106" name="p4007" tags="" position="3850,600" size="100,100">$healthcareLoad: $healthcareLoad -18
+[if ($pass === 0)]
+[[.|Result2]]
+[else]
+[[.|p500F]]
+[continue]</tw-passagedata><tw-passagedata pid="106" name="p4007" tags="" position="3850,600" size="100,100">$healthcareLoad: $healthcareLoad -18
 $deathToll: $deathToll - 100
 $publicSupport: $publicSupport + 2
 $unemployment: $unemployment + 0.5  
@@ -2281,13 +2308,13 @@ Sara : Thank you Madam President*. Sorry about that.
 
 
 [[Its okay|p4008]]
-[[Call me Liz|p4009]]</tw-passagedata><tw-passagedata pid="107" name="p4008" tags="" position="3850,725" size="100,100">$saraLoyality: $saraLoyality-1
+[[Call me Liz|p4009]]</tw-passagedata><tw-passagedata pid="107" name="p4008" tags="" position="3825,725" size="100,100">$saraLoyality: $saraLoyality-1
 --
 Message to:
 Sara : It&#39;s okay.
 Message from:
 Sara : Talk to you soon. Enjoy the rest of your day.
-[[You too|p4015]]</tw-passagedata><tw-passagedata pid="108" name="p4009" tags="" position="3975,725" size="100,100">$saraLoyality: $saraLoyality+3
+[[You too|p4015]]</tw-passagedata><tw-passagedata pid="108" name="p4009" tags="" position="4000,575" size="100,100">$saraLoyality: $saraLoyality+3
 --
 Message to:
 Sara : You can call me Liz
@@ -2330,7 +2357,7 @@ Message from:
 Sara : They are viewed as a threat. I will ask General Viktor and Dr. Jun to make a detailed report.
 [continue]
 
-[if $saraLoyality &gt; 6]
+[if ($saraLoyality &gt; 6 &amp;&amp; $pass === 0)]
 Message from:
 Sara : Enjoy your day.
 [[You too|p4015]]
@@ -2338,10 +2365,20 @@ Sara : Enjoy your day.
 Message from:
 Sara : I hope this works out for Branca&#39;s sake
 [[.|Result2]]
+[continue]
+
+[if ($pass &gt; 0)]
+Message from:
+Sara : Enjoy your day.
+[[You too|p4015]]
 [continue]</tw-passagedata><tw-passagedata pid="114" name="p4015" tags="" position="4200,725" size="100,100">Message to:
 Sara : You too.
 
-[[.|Result2]]</tw-passagedata><tw-passagedata pid="115" name="R2C" tags="" position="4125,225" size="100,100">[if ($priority === &quot;unemployment&quot;)]
+[if ($pass === 0)]
+[[.|Result2]]
+[else]
+[[.|p500F]]
+[continue]</tw-passagedata><tw-passagedata pid="115" name="R2C" tags="" position="4125,225" size="100,100">[if ($priority === &quot;unemployment&quot;)]
 {embed passage: &#39;R1CUnemployment&#39;}
 #RisingPrices (121K posts)
 @EconomyWatch_BNC (18.1K likes): &quot;Food prices are up {$foodPrices}%, rents keep climbing, and wages barely move. People are struggling. #RisingPrices&quot;
@@ -2575,7 +2612,11 @@ The Voice:
 @RajPatel_BNC (14.9K likes): &quot;Everything from bread to electricity is skyrocketing. The numbers don’t lie, Branca’s economy is bleeding citizens. #RisingPrices&quot;
 @GraceKim_Voice (12.4K likes): &quot;Stores report shortages, prices fluctuate daily. Middle-class families are disappearing fast. #RisingPrices&quot;
 @PeterMorozov47 (8.8K likes): &quot;Small business owners are shutting down because costs are uncontrollable. Inflation is the silent crisis Branca can’t ignore. #RisingPrices&quot;
-[continue]</tw-passagedata><tw-passagedata pid="120" name="End" tags="" position="4900,750" size="100,100"></tw-passagedata><tw-passagedata pid="121" name="Result22" tags="" position="4375,0" size="100,100">$day: $day+$dayToAdvance
+[continue]</tw-passagedata><tw-passagedata pid="120" name="End" tags="" position="5200,500" size="100,100">[if ($unemployment &gt; $unemploymentCritical || $foodPrices &gt; $inflationCritical ||$refugeeRate &gt; $immigrationCritical || $healthcareLoad &gt; $healthcareCritical)]
+{embed passage: &#39;End1&#39;}
+[else]
+{embed passage: &#39;ContentEnd&#39;}
+[continue]</tw-passagedata><tw-passagedata pid="121" name="Result22" tags="" position="4375,0" size="100,100">$day: $day+$dayToAdvance
 $publicIndexSupport: (($adSpend*40)+($publicSupport*2)+(($corpSupport+$bankSupport)*2))/10
 --
 [if ($choice === &quot;C&quot;)]
@@ -2837,14 +2878,216 @@ else
 [else]
 [[.|p4000]]
 [continue]
-</tw-passagedata><tw-passagedata pid="124" name="p5000" tags="" position="4650,200" size="100,100">[JavaScript]
+</tw-passagedata><tw-passagedata pid="124" name="p5000" tags="" position="4700,100" size="100,100">[if ($choice === &quot;C&quot;)]
+{embed passage: &#39;p5001&#39;}
+[else]
+{embed passage: &#39;p5002&#39;}
+[continue]
+</tw-passagedata><tw-passagedata pid="125" name="p5001" tags="" position="4875,200" size="100,100">$pass: $pass+1
+--
+{embed passage: &#39;p4000&#39;}</tw-passagedata><tw-passagedata pid="126" name="p5002" tags="" position="4675,350" size="100,100">$pass: $pass+1
+--
+{embed passage: &#39;p4001&#39;}
+[if ($priority === &quot;immigration&quot;)]
+{embed passage: &#39;p3009&#39;}
+[continue]</tw-passagedata><tw-passagedata pid="127" name="p500F" tags="" position="4750,600" size="100,100">$contentEnd: true
+--
+[JavaScript]
+var pdays = engine.state.get(&quot;$dayToAdvance&quot;)
 var priority = engine.state.get(&quot;$priority&quot;)
 var oldpriority = engine.state.get(&quot;$oldpriority&quot;)
 var choice = engine.state.get(&quot;$choice&quot;)
+var unemployment = engine.state.get(&quot;$unemployment&quot;)
+var foodPrices = engine.state.get(&quot;$foodPrices&quot;)
+var refugeeRate = engine.state.get(&quot;$refugeeRate&quot;)
+var healthcareLoad = engine.state.get(&quot;$healthcareLoad&quot;)
+var deathToll = engine.state.get(&quot;$deathToll&quot;)
 if(choice == &quot;C&quot;)
 {
-	engine.state.set(&quot;$oldpriority&quot;, priority)
-	engine.state.set(&quot;$priority&quot;, &quot;none&quot;)
+    if(pdays == 14)
+	{
+    	if(priority == &quot;unemployment&quot;)
+		{
+        	engine.state.set(&quot;$unemployment&quot;, unemployment+1)
+			engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+			engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8)
+			engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+			engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+		}
+        else if(priority == &quot;healthcare&quot;)
+		{
+        	engine.state.set(&quot;$unemployment&quot;, unemployment+1.4)
+			engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+			engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8
+			engine.state.set(&quot;$deathToll&quot;, deathToll+10)
+		}
+	}
+    else if(pdays == 30)
+	{
+		engine.state.set(&quot;$unemployment&quot;, unemployment+3)
+       	engine.state.set(&quot;$foodPrices&quot;, foodPrices+0.8)
+		engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1.7)
+		engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+10)
+		engine.state.set(&quot;$deathToll&quot;, deathToll+62)
+	}
+}
+else
+{
+	if(pdays == 14)
+	{
+    	if(oldpriority == &quot;unemployment&quot;)
+		{
+        	if(choice == &quot;A&quot;)
+			{
+            	engine.state.set(&quot;$unemployment&quot;, unemployment-0.8)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.5)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+            }
+            else
+            {
+				engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+             }
+		}
+        else if(oldpriority == &quot;healthcare&quot;)
+		{
+        	if(choice == &quot;A&quot;)
+			{
+            	engine.state.set(&quot;$unemployment&quot;, unemployment+1.6)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.4)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+1)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+8)
+            }
+            else
+            {
+				engine.state.set(&quot;$unemployment&quot;, unemployment+1.4)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.4)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+0.8)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+4)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+15)
+             }
+		}
+        else if(oldpriority == &quot;immigration&quot;)
+		{
+        	if(choice == &quot;A&quot;)
+			{
+            	engine.state.set(&quot;$unemployment&quot;, unemployment-1)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.7)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate-1.5)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+3)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+25)
+            }
+            else
+            {
+				engine.state.set(&quot;$unemployment&quot;, unemployment+1.5)
+            	engine.state.set(&quot;$foodPrices&quot;, foodPrices+1.2)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+3)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+30)
+             }
+		}
+	}
+    else if(pdays == 21)
+	{
+		if(choice == &quot;A&quot;)
+			{
+            	engine.state.set(&quot;$unemployment&quot;, unemployment+2.3)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1.2)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+7)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+42)
+            }
+            else
+            {
+            	engine.state.set(&quot;$unemployment&quot;, unemployment+2.1)
+				engine.state.set(&quot;$refugeeRate&quot;, refugeeRate+1.2)
+				engine.state.set(&quot;$healthcareLoad&quot;, healthcareLoad+7)
+				engine.state.set(&quot;$deathToll&quot;, deathToll+42)
+             }
+	}
 }
 [continue]
-</tw-passagedata><tw-passagedata pid="125" name="Untitled Passage" tags="" position="4650,325" size="100,100"></tw-passagedata></tw-storydata></html>
+{embed passage: &#39;End&#39;}</tw-passagedata><tw-passagedata pid="128" name="UnemploymentEnd" tags="" position="5200,625" size="100,100">National Standard: 
+Headline: Unemployment Crisis Triggers Emergency Powers and Temporary Information Controls
+Article: Rising unemployment has pushed Branca past a critical threshold, overwhelming social services and destabilizing key industries. As protests escalated and essential supply chains began to falter, the government declared a national emergency late last night at unemployment at a record {$unemployment} %.
+Within hours, the Armed Forces were authorized to assume temporary control over internal security and administrative coordination, citing the risk of systemic collapse. Military leadership stated the move was intended to “stabilize the situation until civilian institutions can resume full function.”
+Shortly after the declaration, nationwide restrictions on social media platforms were enacted to curb what officials described as “accelerating public panic and coordinated unrest.” Authorities emphasized that the measures are temporary, though no timeline for reversal has been announced.
+
+Public Index: 
+Headline: First the Jobs Went. Then the Government. Then the Internet.
+Article: It started with unemployment numbers no one could ignore. Then came protests, shortages, and silence from leadership. Now soldiers stand in the streets — and the screens are dark.
+Many citizens say the emergency powers feel less like protection and more like an admission of failure. Before the shutdown, social media was flooded with footage of empty factories, closed hospitals, and crowds demanding answers. Those posts are gone now.
+What remains is uncertainty. With no civilian officials addressing the public and no way to speak to each other, people are left to assume the worst: that this wasn’t a temporary measure, but the final step after everything else broke.</tw-passagedata><tw-passagedata pid="129" name="InflationEnd" tags="" position="5200,750" size="100,100">National Standard: 
+Headline: Runaway Inflation Forces Emergency Rule as Markets Collapse
+Article: Soaring inflation has rendered the national currency functionally unstable, with food prices rising beyond the reach of most households seeing a record increase of {$foodPrices}% . Major retailers suspended operations this week, citing the inability to price goods reliably.
+As protests over food shortages spread across urban centers, the government declared a state of economic emergency. The Armed Forces were instructed to assume control of logistics hubs, ports, and fuel distribution in an attempt to prevent total market breakdown.
+Late last night, authorities enacted nationwide restrictions on social media platforms, stating that unverified price data and panic-driven coordination were accelerating hoarding and civil unrest. Officials described the measures as necessary to “restore economic order,” though no stabilization plan has been presented.
+
+Public Index: 
+Headline: When Money Stopped Working, Everything Else Followed
+Article: First prices changed by the hour. Then shelves emptied. Then the currency stopped meaning anything at all.
+People stopped trusting stores, then banks, then the government. Protests weren’t political at first — they were about bread. They only became violent once it was clear no one was in control.
+Now soldiers guard warehouses, and the internet is gone. Not because it caused the crisis, but because it showed it too clearly. This isn’t a pause. It’s what happens when money collapses before the state does.</tw-passagedata><tw-passagedata pid="130" name="ImmigrationEnd" tags="" position="5200,875" size="100,100">National Standard: 
+Headline: Anti-Immigrant Violence Erupts Nationwide as State Loses Control
+Article: What began as scattered protests against immigration policy escalated overnight into coordinated violence targeting refugee communities across multiple cities. Armed civilian groups attacked housing blocks, aid centers, and transport routes used by non-citizens, overwhelming local police forces.
+Officials confirmed that refugee populations, now estimated at {$refugeeRate}% of the national population, have become focal points for public anger amid rising unemployment at {$unemployment}% and sustained food price increases of {$foodPrices}%. Government statements urging calm failed to slow the unrest.
+Hospitals reported being unable to treat the growing number of injured, while daily virus-related deaths climbed to {$deathToll}. Military units were deployed to enforce curfews and secure key districts, effectively placing large parts of the country under martial control.
+Access to social media platforms was restricted early this morning, with authorities citing the rapid spread of calls for violence and retaliatory attacks. No timeline has been provided for the restoration of civilian governance.
+
+Public Index: 
+Headline: When Fear Needed a Target, Immigrants Were Chosen
+Article: With {$unemployment}% of the workforce without jobs and food prices up {$foodPrices}%, people began looking for explanations that felt immediate and visible. Refugees, now {$refugeeRate}% of the population, were no longer seen as neighbors but as competitors for shrinking resources.
+Online rhetoric turned into street action faster than anyone expected. Rumors spread. Names and addresses followed. Violence became communal, then normalized. By the time officials asked for restraint, hospitals were already at max capacity and emergency rooms were turning people away.
+The state responded late and bluntly. Soldiers on the streets. Curfews enforced at gunpoint. Social platforms taken offline once they could no longer be controlled. Deaths from the virus continued at {$deathToll} per day, largely unnoticed beneath the noise of unrest.
+This was not a failure of border policy alone. It was what happened when fear outpaced governance, and when delay allowed anger to decide faster than law ever could.</tw-passagedata><tw-passagedata pid="131" name="HealthcareEnd" tags="" position="5200,1000" size="100,100">National Standard: 
+Headline: Covid-49 Overwhelms Branca as Healthcare System Collapses
+Article: Covid-49 transmission has accelerated beyond containment, overwhelming national healthcare infrastructure and forcing the government to relinquish civilian control in multiple regions. Hospitals are operating at {$healthcareLoad}% capacity, with emergency wards reporting critical shortages of staff, oxygen, and basic medical supplies.
+Daily virus-related deaths have reached {$deathToll}, a figure officials privately acknowledge is an undercount due to unreported fatalities outside formal care facilities. With {$unemployment}% unemployment and food prices up {$foodPrices}%, compliance with remaining health measures collapsed as citizens prioritized survival over restrictions.
+Medical professionals issued coordinated appeals for emergency action earlier this week. Those appeals went unanswered. Within days, hospital administrators began refusing admissions, redirecting patients to improvised triage centers that lack equipment and trained personnel.
+The military has assumed control of logistics, hospital security, and population movement. Nationwide digital communication platforms were taken offline after authorities cited mass panic, misinformation, and coordinated unrest triggered by leaked hospital mortality data.
+No public timeline has been provided for the restoration of healthcare services or civilian governance.
+
+Public Index: 
+Headline: The System Did Not Fail Suddenly. It Failed All at Once.
+Article: Public health authorities acknowledge that the healthcare system has entered a critical phase, with facilities operating at {$healthcareLoad}% capacity and daily Covid-49 deaths reaching {$deathToll}. Emergency care is now prioritized strictly for the most severe cases.
+Medical workers report that staffing shortages and supply constraints are affecting response times and treatment availability. In several regions, temporary care centers have been established, though officials confirm they are unable to meet current demand.
+Following unrest linked to leaked health data, communication networks were restricted and military units assumed control of healthcare security and transport operations. The government has not announced further public briefings.
+Health officials state that without immediate stabilization, excess mortality is expected to continue in the coming weeks.</tw-passagedata><tw-passagedata pid="132" name="ContentEnd" tags="" position="5525,500" size="100,100">$margin: 3
+--
+[if $reformer &gt; ($hardliner+margin)]
+{embed passage: &#39;ReformerEnd&#39;}
+[continue]
+[if $hardliner &gt; ($reformer+margin)]
+{embed passage: &#39;HardlinerEnd&#39;}
+[continue]
+[if $decisiveness &lt; 9]
+{embed passage: &#39;ParalysisEnd&#39;}
+[else]
+{embed passage: &#39;SurvivalEnd&#39;}
+[continue]
+[if $healthcareLoad &gt; $healthcareCritical]
+
+[continue]
+[if $contentEnd]
+{embed passage: &#39;ContentEnd&#39;}
+[continue]</tw-passagedata><tw-passagedata pid="133" name="End1" tags="" position="4900,825" size="100,100">
+[if $unemployment &gt; $unemploymentCritical]
+{embed passage: &#39;UnemploymentEnd&#39;}
+[continue]
+[if $foodPrices &gt; $inflationCritical]
+{embed passage: &#39;InflationEnd&#39;}
+[continue]
+[if $refugeeRate &gt; $immigrationCritical]
+{embed passage: &#39;ImmigrationEnd&#39;}
+[continue]
+[if $healthcareLoad &gt; $healthcareCritical]
+{embed passage: &#39;HealthcareEnd&#39;}
+[continue]
+[if $contentEnd]
+
+PS. The game is complete
+[continue]</tw-passagedata><tw-passagedata pid="134" name="ReformerEnd" tags="" position="5425,625" size="100,100"></tw-passagedata><tw-passagedata pid="135" name="HardlinerEnd" tags="" position="5650,625" size="100,100"></tw-passagedata><tw-passagedata pid="136" name="ParalysisEnd" tags="" position="5425,800" size="100,100"></tw-passagedata><tw-passagedata pid="137" name="SurvivalEnd" tags="" position="5650,800" size="100,100"></tw-passagedata></tw-storydata></html>
